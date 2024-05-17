@@ -1,5 +1,39 @@
+ * {
+    font-family: "Owswald", sans-serif;
+ }
+ 
+ body {
+    --cor2-light: #F0E9FF;
+ }
 
+ .bgPink {
+    background-color: var(--cor2-light);
+ }
+
+ .bgWhite {
+    background-color: var(--cor1-light);
+ }
 
 .banner-home {
-    max-width: 78vw;
+    max-width: 83vw;
+} 
+
+.banner-mobile {
+   justify-content: ;
 }
+
+.car-img {
+   width: 12rem;
+}
+
+@media (max-width: 1370px) {
+   .card-img {
+     width: 11rem;
+   }
+ }
+
+@media (max-width: 500px) {
+   .card-img {
+     width: 7rem;
+   }
+ }
