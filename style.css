@@ -4,6 +4,7 @@
  
  body {
     --cor2-light: #F0E9FF;
+    --roxo-: #50518C;
  }
 
  .bgPink {
@@ -18,12 +19,16 @@
     max-width: 83vw;
 } 
 
-.banner-mobile {
-   justify-content: ;
+.card-img {
+   width: 12rem;
 }
 
-.car-img {
-   width: 12rem;
+.card-img-promo {
+   width: 19rem;
+}
+.btn-roxo {
+   background-color: var(--roxo-);
+   color: white;
 }
 
 @media (max-width: 1370px) {
@@ -35,5 +40,8 @@
 @media (max-width: 500px) {
    .card-img {
      width: 7rem;
+   }
+   .card-img-promo{
+      width: 13rem;
    }
  }
