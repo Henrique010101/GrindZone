@@ -24,7 +24,9 @@
 }
 
 .card-img-promo {
-   width: 19rem;
+   object-fit: contain;
+   max-height: 19rem;
+   width: 100%;
 }
 .btn-roxo {
    background-color: var(--roxo-);
@@ -35,6 +37,9 @@
    .card-img {
      width: 11rem;
    }
+   .card-img-promo{
+      max-height: 16rem;
+   }
  }
 
 @media (max-width: 500px) {
@@ -42,6 +47,6 @@
      width: 7rem;
    }
    .card-img-promo{
-      width: 13rem;
+      max-height: 13rem;
    }
  }
