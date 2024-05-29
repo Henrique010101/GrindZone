@@ -1,5 +1,6 @@
  * {
     font-family: "Owswald", sans-serif;
+    
  }
  
  body {
@@ -33,6 +34,48 @@
    color: white;
 }
 
+.by {
+   display: flex;
+   padding-top: 80px;
+ }
+ .sidebar {
+   width: 30vh;
+   height: 100vh;
+   background-color: #f8f9fa;
+   padding: 20px;
+   border-right: 1px solid #dee2e6;
+ }
+ .content {
+   flex-grow: 1;
+   padding: 20px;
+ }
+
+ input[type=checkbox] {
+   border: 2px solid var(--cor2-light);
+   box-shadow: none;
+ }
+ 
+ input[type=checkbox]:checked,
+ input[type="checkbox"]:focus {
+   background-color: var(--roxo-);
+   border-color: var(--cor2-light);
+   box-shadow: none;
+   outline: none;
+ }
+
+ .input-range::-webkit-slider-thumb {
+   background-color: var(--roxo-);
+ }
+
+ ::-webkit-scrollbar {
+   width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   width: 9px;
+   background-color: var(--roxo-)
+}
+
 @media (max-width: 1370px) {
    .card-img {
      width: 11rem;
@@ -48,5 +91,8 @@
    }
    .card-img-promo{
       max-height: 13rem;
+   }
+   .sidebar {
+      width: 35vh;
    }
  }
