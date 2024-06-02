@@ -3,8 +3,10 @@
     
  }
  
+ 
  body {
     --cor2-light: #F0E9FF;
+    --cor1-dark: #0E0D0D;
     --roxo-: #50518C;
  }
 
@@ -96,3 +98,19 @@
       width: 35vh;
    }
  }
+
+ [data-bs-theme="dark"] {
+   color: white;
+}
+
+[data-bs-theme="dark"] .nav-cont {
+   background-color: var(--cor1-dark);
+}
+
+[data-bs-theme="dark"] .text-decoration-line-through {
+   color: #A6A6A6!important;
+}
+
+[data-bs-theme="dark"] .sidebar {
+   background-color: var(--cor1-dark)!important;
+}
