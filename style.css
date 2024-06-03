@@ -114,3 +114,7 @@
 [data-bs-theme="dark"] .sidebar {
    background-color: var(--cor1-dark)!important;
 }
+
+[data-bs-theme="dark"] .offcanvas-header, .offcanvas-body {
+   background-color: var(--cor1-dark);
+}

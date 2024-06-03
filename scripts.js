@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll("#nav-link");
+    const navLinks = document.querySelectorAll(".nav-link");
     const inputCheck = document.querySelector('#modo-noturno');
     const elemento = document.querySelector('body');
-    const img = document.querySelector('.img-img');
+    const img = document.querySelectorAll('.img-img');
     const spanBanner = document.querySelector('.carousel');
 
     // Função para aplicar o modo noturno
@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (img) {
-            img.src = ativo ? "./assets/GrindZone-dark.png" : "./assets/GrindZone-light.png";
+            img.forEach(imagem => {
+                imagem.src = ativo ? "./assets/GrindZone-dark.png" : "./assets/GrindZone-light.png";
+            });
         }
     };
 
