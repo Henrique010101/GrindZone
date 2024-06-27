@@ -11,6 +11,10 @@
     --roxo-: #50518C;
  }
 
+ .offcanvas-header {
+   background-color: var(--cor1-light);
+ }
+
  .bgPink {
     background-color: var(--cor2-light);
  }
@@ -49,7 +53,7 @@
  }
 
  input[type=checkbox] {
-    border: 2px solid var(--cor2-light);
+    border: 2px solid var(--cor1-light);
     box-shadow: none;
  }
 
@@ -102,6 +106,11 @@
     .sidebar {
       height: auto;
       justify-content: center;
+    }
+    .banner-home {
+      max-width: 100vw;
+      width: 100vw;
+      padding: 0;
     }
  }
 
