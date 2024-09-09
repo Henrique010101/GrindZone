@@ -1,13 +1,10 @@
-const API_URL = 'http://localhost:3000/api'
-
 const todosProdutos = document.getElementById('produtos');
-
 let todosOsProdutos = []; // Armazenar todos os produtos
 let produtosFiltrados = [];
 
 async function carregarProdutos() {
     try {
-        const response = await fetch(`${API_URL}/products`);
+        const response = await fetch(`http://localhost:3000/api/products`);
         if (!response.ok) throw new Error('Erro na requisição');
         todosOsProdutos = await response.json();
         produtosFiltrados = [...todosOsProdutos];
@@ -101,7 +98,7 @@ async function renderizarProdutos() {
                   <!-- Modal -->
 
                 <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -174,7 +171,7 @@ async function renderizarProdutos() {
     }
 }
 
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function() {
     carregarProdutos(); // Carrega produtos na inicialização
     configurarFiltros();
 
@@ -197,4 +194,4 @@ window.onload = function () {
             }
         }, 50); // Ajuste o tempo se necessário
     }
-}
+})

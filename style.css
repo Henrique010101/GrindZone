@@ -24,6 +24,9 @@
    width: 100%;
    height: 50%;
  }
+ .letra-roxa {
+   color: var(--roxo-);
+ }
 
  .carousel-control-next,
  .carousel-control-prev {
@@ -79,6 +82,11 @@
 
  .bg-cor {
     background-color: var(--cor1-light);
+ }
+
+ .btn-desativado {
+   opacity: 0.6;
+   pointer-events: none;
  }
 
  input[type=checkbox] {
@@ -190,3 +198,7 @@
  [data-bs-theme="dark"] .offcanvas-header {
     background-color: var(--cor1-dark);
  }
+
+ [data-bs-theme="dark"] .letra-roxa {
+   color: var(--cor2-light);
+}

@@ -1,12 +1,10 @@
-const API_URL = 'http://localhost:3000/api'
-
 window.onload = function () {
 
     const todosProdutosPromocao = document.getElementById("produtos-promocao");
 
     async function renderizarProdutosNaPromocao() {
         try {
-            const response = await fetch(`${API_URL}/products/promocao`)
+            const response = await fetch(`http://localhost:3000/api/products/promocao`)
             if (!response.ok) throw new Error('Erro na requisição');
             const produtos = await response.json();
             
@@ -40,7 +38,7 @@ window.onload = function () {
                 </div>
                 
                 <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
