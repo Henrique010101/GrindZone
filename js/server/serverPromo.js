@@ -7,7 +7,7 @@ window.onload = function () {
             const response = await fetch(`http://localhost:3000/api/products/promocao`)
             if (!response.ok) throw new Error('Erro na requisição');
             const produtos = await response.json();
-            
+
             let HTML = '';
 
             produtos.forEach(produto => {

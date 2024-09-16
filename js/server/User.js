@@ -1,14 +1,14 @@
 document.getElementById('register-form').addEventListener('submit', registerUser);
+document.getElementById('login-form').addEventListener('submit', loginUser);
 
-async function registerUser (event) {
+async function registerUser(event) {
     event.preventDefault();
 
-    const submitButton = document.getElementById('enviar');
+    let submitButton = document.getElementById('enviar');
     const name = document.getElementById('register-name').value;
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById('register-confirm-password').value;
-
 
     if (!name || !email || !password || !confirmPassword) {
         console.error('Um ou mais elementos não foram encontrados.');
@@ -20,54 +20,135 @@ async function registerUser (event) {
         const response = await fetch(`http://localhost:3000/api/register`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             credentials: 'include', // Isso garante que os cookies sejam enviados/recebidos
             body: JSON.stringify({
                 name: name,
                 email: email,
                 password: password,
-                confirmpassword: confirmPassword,
+                confirmpassword: confirmPassword, // Confirme se está correto
             }),
         })
 
-        name = '';
-        email = '';
-        password = '';
-        confirmPassword = '';
+        document.getElementById('register-name').value = '';
+        document.getElementById('register-email').value = '';
+        document.getElementById('register-password').value = '';
+        document.getElementById('register-confirm-password').value = '';
+
+        if (!response.ok) {
+            throw new Error(data.msg || 'Erro desconhecido durante o registro.');
+        }
 
         const data = await response.json();
         alert(data.msg)
+        location.reload();
 
     } catch (error) {
         console.error('Erro ao registrar:', error);
+        alert('Erro ao fazer o registro. Por favor, tente novamente.');
     }
 }
 
-window.addEventListener('load', async () => {
+async function loginUser(event) {
+    event.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
     try {
-      const response = await fetch('http://localhost:3000/api/verify-session',
-        { method: 'GET', credentials: 'include' });
-  
-      if (response.ok) {
-        const data = await response.json();
-        // Restaurar o estado do usuário no front-end
-        document.getElementById('nav_entrar').style.display = 'none';
-        document.getElementById('nav_registrar').style.display = 'none';
-        document.getElementById('nav_sair').style.display = 'block';
-        document.getElementById('nav_cart').style.display = 'block';
-  
-        // Opcional: Exibir o nome do usuário ou outros dados retornados
-        console.log(`Usuário autenticado: ${data.email}`);
-      } else {
-        // Caso não autenticado, exibir os botões de login/registro
-        document.getElementById('nav_entrar').style.display = 'block';
-        document.getElementById('nav_registrar').style.display = 'block';
-        document.getElementById('nav_sair').style.display = 'none';
-        document.getElementById('nav_cart').style.display = 'none';
-      }
+        const response = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
+        })
+
+        if (!response.ok) {
+            throw new Error(data.msg || 'Erro desconhecido durante o login.');
+        }
+            const data = await response.json();
+            alert(data.message);
+            document.getElementById('login-email').value = ''; // Limpa os campos corretamente
+            document.getElementById('login-password').value = '';
+            location.reload();
+
     } catch (error) {
-      console.error('Erro ao verificar sessão:', error);
+        console.error('Erro ao fazer login:', error);
+        alert('Erro ao fazer login. Por favor, tente novamente.');
     }
-  });
-  
+}
+
+async function verifySession() {
+
+    try {
+        const response = await fetch('http://localhost:3000/api/check-session', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            if (data.isAuthenticated) {
+                document.getElementById('nav_entrar').style.display = 'none';
+                document.getElementById('nav_registrar').style.display = 'none';
+                document.getElementById('nav_sair').style.display = 'block';
+                document.getElementById('nav_cart').style.display = 'block';
+            } else {
+                document.getElementById('nav_entrar').style.display = 'block';
+                document.getElementById('nav_registrar').style.display = 'block';
+                document.getElementById('nav_sair').style.display = 'none';
+                document.getElementById('nav_cart').style.display = 'none';
+            }
+        } else {
+            console.error('Usuário não autenticado (error):', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro ao verificar estado de autenticação:', error);
+    }
+}
+
+async function logout() {
+    try {
+        const response = await fetch('http://localhost:3000/api/logout', {
+            method: 'GET',
+            credentials: 'include' // Inclui cookies na solicitação
+        });
+
+        if (response.ok) {
+            // Sucesso no logout, limpe o estado do front-end e atualize o DOM
+            document.getElementById('nav_entrar').style.display = 'block';
+            document.getElementById('nav_registrar').style.display = 'block';
+            document.getElementById('nav_sair').style.display = 'none';
+            document.getElementById('nav_cart').style.display = 'none';
+
+            alert('Você foi deslogado com sucesso!');
+        } else {
+            // Trate erros aqui
+            alert('Erro ao deslogar. Tente novamente.');
+        }
+    } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+        alert('Erro ao deslogar. Tente novamente.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await verifySession();
+});
+
+document.getElementById('nav_sair').addEventListener('click', async () => {
+    await logout();
+});
+
+document.addEventListener('click', async (event) => {
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (event.target.matches('.action-requiring-auth')) {
+        await verifySession(); // Verifique o token antes de executar a ação
+        // Execute a ação aqui
+    }
+});
+

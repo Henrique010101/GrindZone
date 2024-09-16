@@ -64,6 +64,12 @@
  .preco-total {
    font-size: 1.1rem;
  }
+ .product-cart-price {
+   font-size: 1.2rem;
+ }
+ .product-cart-price-promo {
+   font-size: 1.1rem;
+ }
 
  .btn-roxo {
     background-color: var(--roxo-);
@@ -78,6 +84,10 @@
     height: auto;
     background-color: #f8f9fa;
     border-right: 1px solid #dee2e6;
+ }
+
+ .offcanvas {
+   width: 55%!important;
  }
 
  .bg-cor {
@@ -136,6 +146,12 @@
    .flex-wrap-sm {
       flex-wrap: wrap !important;
     }
+    .offcanvas-body {
+      flex-direction: column;
+    }
+    .offcanvas {
+      width: 85%!important;
+    }
  }
 
  @media (max-width: 500px) {
@@ -172,6 +188,12 @@
     }
     .preco-promo {
       font-size: 0.7rem;
+    }
+    .product-cart-price {
+      font-size: 1.1rem;
+    }
+    .product-cart-price-promo {
+      font-size: 0.9rem;
     }
  }
 

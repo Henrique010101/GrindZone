@@ -47,13 +47,21 @@
                 <a class="nav-link nav-link-produtos" href="produtos.html">Produtos</a>
               </li>
               <li id="user-section" class="dropdown">
-                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button" data-bs-toggle="dropdown">Perfil</button>
+                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button"
+                  data-bs-toggle="dropdown">Perfil</button>
                 <ul class="dropdown-menu">
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" style="display: block;" data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#" style="display: block;" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;" data-bs-toggle="modal" data-bs-target="#logout-button">Sair</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;" data-bs-toggle="modal" data-bs-target="#modal-cart">Carrinho<i class="bi bi-cart2 ms-2"></i></a></li>
-                </ul
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" style="display: block;"
+                      data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#"
+                      style="display: block;" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a>
+                  </li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;"
+                      data-bs-target="#logout-button">Sair</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;"
+                      data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -77,22 +85,22 @@
       <div class="carousel-inner border-bottom">
         <div class="carousel-item active">
           <img src="./assets/desktop/banner_1_home.png" class="d-none d-xl-block banner-home img-fluid" alt="...">
-          <img src="./assets/tablet/banner_1_home_tablet.png" class="banner-home h-25 img-fluid d-none d-md-block d-xl-none"
-            alt="">
+          <img src="./assets/tablet/banner_1_home_tablet.png"
+            class="banner-home h-25 img-fluid d-none d-md-block d-xl-none" alt="">
           <img src="./assets/mobile/banner_1_home_mobile.png"
             class="banner-home d-flex justify-content-center img-fluid d-md-none" alt="">
         </div>
         <div class="carousel-item">
           <img src="./assets/desktop/banner_2_home.png" class="d-none d-xl-block banner-home img-fluid" alt="...">
-          <img src="./assets/tablet/banner_2_home_tablet.png" class="banner-home h-25 img-fluid d-none d-md-block d-xl-none"
-            alt="">
+          <img src="./assets/tablet/banner_2_home_tablet.png"
+            class="banner-home h-25 img-fluid d-none d-md-block d-xl-none" alt="">
           <img src="./assets/mobile/banner_2_home_mobile.png"
             class="banner-home d-flex justify-content-center img-fluid d-md-none" alt="">
         </div>
         <div class="carousel-item">
           <img src="./assets/desktop/banner_3_home.png" class="d-none d-xl-block banner-home img-fluid" alt="...">
-          <img src="./assets/tablet/banner_3_home_tablet.png" class="banner-home h-25 img-fluid d-none d-md-block d-xl-none"
-            alt="">
+          <img src="./assets/tablet/banner_3_home_tablet.png"
+            class="banner-home h-25 img-fluid d-none d-md-block d-xl-none" alt="">
           <img src="./assets/mobile/banner_3_home_mobile.png"
             class="banner-home d-flex justify-content-center img-fluid d-md-none" alt="">
         </div>
@@ -167,7 +175,7 @@
     <h2 class="text-center py-3 py-xl-5 backPadrao">Produtos na promoção!</h2>
 
     <section class="container row mx-auto g-4" id="produtos-promocao">
-      
+
 
     </section>
 
@@ -236,127 +244,148 @@
 
   </main>
 
-  <!-- Modal-Cart -->
+  <!-- OffCanvas-Cart -->
 
-  <div class="modal fade" id="modal-cart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <header class="offcanvas-header">
+      <h2 class="offcanvas-title" id="offcanvasRightLabel">Seu carrinho</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </header>
+    <section  class="offcanvas-body d-flex">
+      <div class="d-flex flex-column justify-content-center col-12 col-md-6 cart-items">
+        <h3 class="top-0">Todos os itens:</h3>
+        <article style="max-height: 120px;" class="d-flex py-1 border rounded cart-item">
+          <img style="max-width: 110px; max-height: 110px;" src="/assets/shape-maple-cbgang.jpg" alt="shape">
+          <div class="d-flex justify-content-between w-100 p-1">
+            <div id="descricao-itens-cart" class="d-flex flex-column">
+              <h5 id="product-cart-name" class="">Shape</h5>
+                <p class="descricao-item-cart"></p>
+            </div>
+            <div id="valor-item" class="d-flex flex-column align-items-center justify-content-end">
+              <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">200,00 R$</span>
+              <span id="product-cart-price" class="product-cart-price">200,00 R$</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <section  class="d-flex flex-column align-items-center justify-content-center col-12 col-md-6 mt-3 mt-md-0 pt-2 border-top border-3 border-md-top-0 container detalhesDaCompra">
+
+        <p id="ValorBruto" class="fs-4">1000,00 R$</p>
+
+        <p id="ValorDaPromocao" class="fs-4 border-bottom">- 199,00 R$</p>
+
+        <h3 id="ValorDaTotalTitulo" class="m-0">Valor total:</h3>
+        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">801.00 R$ À vista</p>
+        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">ou</p>
+        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">10x de 80,10 R$</p>
+
+        <button type="button" class="btn btn-roxo mt-1">Finalizar Compra</button>
+      </section >
+    </section >
+  </aside>
+
+  <!-- MODAL LOGIN -->
+
+  <div class="modal fade" id="modal-perfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Seu carrinho</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+        <div class="d-flex justify-content-center pt-4">
+          <h1 class="modal-title text-center fs-4 fw-bold" id="modalLabel">Login</h1>
         </div>
         <div class="modal-body">
-
+          <form id="login-form" action="/login" method="post">
+            <fieldset>
+              <div class="mb-3">
+                <input type="email" id="login-email" name="login-email" autocomplete="username"
+                  class="bg-light-grey form-control" placeholder="Email" required>
+              </div>
+              <div class="mb-3">
+                <input type="password" id="login-password" autocomplete="current-password" name="login-password"
+                  class="bg-light-grey form-control" placeholder="Senha" required>
+              </div>
+              <div class="d-flex justify-content-center pt-3 gap-2">
+                <button type="submit" class="btn btn-roxo col-6">Entrar</button>
+              </div>
+            </fieldset>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-roxo">Finalizar compra</button>
+        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+          <strong class="font-black text-decoration-none">Não tem uma conta?
+            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
+              class="p-1 fw-semibold text-decoration-none letra-roxa">
+              Registre-se!
+            </a></strong>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL LOGIN -->
 
-<div class="modal fade" id="modal-perfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="modalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content">
-    <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-      aria-label="Close"></button>
-    <div class="d-flex justify-content-center pt-4">
-      <h1 class="modal-title text-center fs-4 fw-bold" id="modalLabel">Login</h1>
-    </div>
-    <div class="modal-body">
-      <form id="login-form" action="/login" method="post">
-        <fieldset>
-          <div class="mb-3">
-            <input type="email" id="login-email" name="login-email" class="bg-light-grey form-control"
-              placeholder="Email" required>
-          </div>
-          <div class="mb-3">
-            <input type="password" id="login-password" name="login-password" class="bg-light-grey form-control"
-              placeholder="Senha" required>
-          </div>
-          <div class="d-flex justify-content-center pt-3 gap-2">
-            <button type="submit" class="btn btn-roxo col-6">Entrar</button>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-    <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-      <strong class="font-black text-decoration-none">Não tem uma conta?
-        <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
-          class="p-1 fw-semibold text-decoration-none letra-roxa">
-          Registre-se!
-        </a></strong>
-    </div>
-  </div>
-</div>
-</div>
+  <!-- MODAL REGISTRO  -->
 
-
-<!-- MODAL REGISTRO  -->
-
-<div class="modal fade" id="modal-registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="modalRegistroLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content">
-    <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-      aria-label="Close"></button>
-    <div class="d-flex justify-content-center pt-4">
-      <h1 class="modal-title text-center fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
-    </div>
-    <div class="modal-body">
-      <form id="register-form" data-formulario>
-        <fieldset class="mb-3">
-          <input name="nome" id="name" class="bg-light-grey form-control" placeholder="Nome de usuário" type="text"
-            minlength="3" required />
-          <span class="mensagem-erro text-danger"></span>
-        </fieldset>
-
-        <fieldset class="mb-3">
-          <input name="register-email" id="register-email" class="bg-light-grey form-control" placeholder="Email" type="email"
-            minlength="4" required />
-          <span class="mensagem-erro text-danger"></span>
-        </fieldset>
-
-        <fieldset class="mb-3">
-          <input name="register-password" id="register-password" class="bg-light-grey form-control"
-            placeholder="Senha" type="password" minlength="4" required />
-          <span class="mensagem-erro text-danger"></span>
-        </fieldset>
-
-        <fieldset class="mb-3">
-          <input name="register-confirm-password" id="register-confirm-password" class="bg-light-grey form-control" type="password"
-            placeholder="Confirmar senha" minlength="4" required />
-            <span class="mensagem-erro text-danger"></span>
-        </fieldset>
-        <fieldset class="form-check mb-3">
-          <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
-          <label class="form-check-label" for="termos">
-            Li e estou ciente quanto às condições de tratamento dos meus dados conforme
-            descrito na Política de Privacidade.
-          </label>
-          <span class="mensagem-erro text-danger"></span>
-        </fieldset>
-
-        <div class="d-flex justify-content-center pt-3 gap-2">
-          <button type="submit" class="btn btn-roxo col-6" id="enviar" data-botao-enviar>Confirmar</button>
+  <div class="modal fade" id="modal-registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalRegistroLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+        <div class="d-flex justify-content-center pt-4">
+          <h1 class="modal-title text-center fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
         </div>
-      </form>
-    </div>
-    <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-      <strong class="font-black text-decoration-none">Ja tem uma conta?
-        <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
-          class="p-1 fw-semibold text-decoration-none letra-roxa">
-          Entre!
-        </a></strong>
+        <div class="modal-body">
+          <form id="register-form" data-formulario>
+            <fieldset class="mb-3">
+              <input name="register-name" id="register-name" class="bg-light-grey form-control"
+                placeholder="Nome de usuário" type="text" minlength="3" required />
+              <span class="mensagem-erro text-danger"></span>
+            </fieldset>
+
+            <fieldset class="mb-3">
+              <input name="register-email" id="register-email" autocomplete="username"
+                class="bg-light-grey form-control" placeholder="Email" type="email" minlength="4" required />
+              <span class="mensagem-erro text-danger"></span>
+            </fieldset>
+
+            <fieldset class="mb-3">
+              <input name="register-password" id="register-password" autocomplete="new-password"
+                class="bg-light-grey form-control" placeholder="Senha" type="password" minlength="4" required />
+              <span class="mensagem-erro text-danger"></span>
+            </fieldset>
+
+            <fieldset class="mb-3">
+              <input name="register-confirm-password" id="register-confirm-password" autocomplete="new-password"
+                class="bg-light-grey form-control" type="password" placeholder="Confirmar senha" minlength="4"
+                required />
+              <span class="mensagem-erro text-danger"></span>
+            </fieldset>
+            <fieldset class="form-check mb-3">
+              <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
+              <label class="form-check-label" for="termos">
+                Li e estou ciente quanto às condições de tratamento dos meus dados conforme
+                descrito na Política de Privacidade.
+              </label>
+              <span class="mensagem-erro text-danger"></span>
+            </fieldset>
+
+            <div class="d-flex justify-content-center pt-3 gap-2">
+              <button type="submit" class="btn btn-roxo col-6 action-requiring-auth" id="enviar"
+                data-botao-enviar>Confirmar</button>
+            </div>
+          </form>
+        </div>
+        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+          <strong class="font-black text-decoration-none">Ja tem uma conta?
+            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
+              class="p-1 fw-semibold text-decoration-none letra-roxa">
+              Entre!
+            </a></strong>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

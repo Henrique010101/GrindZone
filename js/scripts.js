@@ -49,30 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const btnMoletom = document.getElementById('Moletom');
-const btnShape = document.getElementById('Shape');
-const btnTruck = document.getElementById('Truck');
-const btnRolamento = document.getElementById('Rolamento');
-const btnRodinha = document.getElementById('Rodinha');
-const btnTenis = document.getElementById('Tênis');
+document.addEventListener('DOMContentLoaded', () => {
+    const btnMoletom = document.getElementById('Moletom');
+    const btnShape = document.getElementById('Shape');
+    const btnTruck = document.getElementById('Truck');
+    const btnRolamento = document.getElementById('Rolamento');
+    const btnRodinha = document.getElementById('Rodinha');
+    const btnTenis = document.getElementById('Tênis');
 
-// Mapeamento entre IDs e valores de categoria
-const categorias = {
-    '1': 'Shape',
-    '2': 'Rodinha',
-    '3': 'Rolamento',
-    '4': 'Truck',
-    '5': 'Moletom',
-    '6': 'Tênis'
-};
+    // Mapeamento entre IDs e valores de categoria
+    const categorias = {
+        '1': 'Shape',
+        '2': 'Rodinha',
+        '3': 'Rolamento',
+        '4': 'Truck',
+        '5': 'Moletom',
+        '6': 'Tênis'
+    };
 
-function redirecionarParaProdutos(categoria) {
-    window.location.href = `./produtos.html?categoria=${categoria}`;
-}
+    function redirecionarParaProdutos(categoria) {
+        window.location.href = `./produtos.html?categoria=${categoria}`;
+    }
 
-btnMoletom.addEventListener('click', () => redirecionarParaProdutos(categorias['5']));
-btnShape.addEventListener('click', () => redirecionarParaProdutos(categorias['1']));
-btnTruck.addEventListener('click', () => redirecionarParaProdutos(categorias['4']));
-btnRolamento.addEventListener('click', () => redirecionarParaProdutos(categorias['3']));
-btnRodinha.addEventListener('click', () => redirecionarParaProdutos(categorias['2']));
-btnTenis.addEventListener('click', () => redirecionarParaProdutos(categorias['6']));
+    // Verifique se os elementos existem antes de adicionar o listener
+    if (btnMoletom) btnMoletom.addEventListener('click', () => redirecionarParaProdutos(categorias['5']));
+    if (btnShape) btnShape.addEventListener('click', () => redirecionarParaProdutos(categorias['1']));
+    if (btnTruck) btnTruck.addEventListener('click', () => redirecionarParaProdutos(categorias['4']));
+    if (btnRolamento) btnRolamento.addEventListener('click', () => redirecionarParaProdutos(categorias['3']));
+    if (btnRodinha) btnRodinha.addEventListener('click', () => redirecionarParaProdutos(categorias['2']));
+    if (btnTenis) btnTenis.addEventListener('click', () => redirecionarParaProdutos(categorias['6']));
+});

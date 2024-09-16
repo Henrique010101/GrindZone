@@ -171,7 +171,7 @@ async function renderizarProdutos() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     carregarProdutos(); // Carrega produtos na inicialização
     configurarFiltros();
 
