@@ -24,13 +24,13 @@
     <nav class="navbar-expand-lg navbar backPadrao fixed-top p-0 border-bottom">
       <div class="container-fluid nav-cont bg-cor">
         <a class="navbar-brand p-0"><img class="img-fluid img-img mx-5" src="./assets/GrindZone_logo.png"
-            style="max-width: 180px;" alt="Logo da cafeteria Serenatto"></a>
+          style="max-width: 180px;" alt="Logo da cafeteria Serenatto"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
+          <div class="offcanvas-header bg-cor">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img class="img-fluid img-img mt-5"
                 src="./assets/GrindZone_logo.png" style="max-width: 300px;" alt="Logo da cafeteria Serenatto"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -247,19 +247,19 @@
   <!-- OffCanvas-Cart -->
 
   <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <header class="offcanvas-header">
+    <header class="offcanvas-header bg-cor">
       <h2 class="offcanvas-title" id="offcanvasRightLabel">Seu carrinho</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </header>
-    <section  class="offcanvas-body d-flex">
-      <div class="d-flex flex-column justify-content-center col-12 col-md-6 cart-items">
+    <section class="offcanvas-body d-flex align-items-center">
+      <div class="d-flex flex-column col-12 col-md-6 cart-items">
         <h3 class="top-0">Todos os itens:</h3>
         <article style="max-height: 120px;" class="d-flex py-1 border rounded cart-item">
-          <img style="max-width: 110px; max-height: 110px;" src="/assets/shape-maple-cbgang.jpg" alt="shape">
+          <img class="image-cart" src="/assets/shape-maple-cbgang.jpg" alt="shape">
           <div class="d-flex justify-content-between w-100 p-1">
-            <div id="descricao-itens-cart" class="d-flex flex-column">
-              <h5 id="product-cart-name" class="">Shape</h5>
-                <p class="descricao-item-cart"></p>
+            <div class="d-flex descricao-itens-cart flex-column">
+              <h5 class="product-cart-name fw-semibold">Shape CB Gang</h5>
+                <p class="descricao-item-cart fs-6 fw-light"></p>
             </div>
             <div id="valor-item" class="d-flex flex-column align-items-center justify-content-end">
               <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">200,00 R$</span>
@@ -268,18 +268,13 @@
           </div>
         </article>
       </div>
-      <section  class="d-flex flex-column align-items-center justify-content-center col-12 col-md-6 mt-3 mt-md-0 pt-2 border-top border-3 border-md-top-0 container detalhesDaCompra">
-
-        <p id="ValorBruto" class="fs-4">1000,00 R$</p>
-
-        <p id="ValorDaPromocao" class="fs-4 border-bottom">- 199,00 R$</p>
-
-        <h3 id="ValorDaTotalTitulo" class="m-0">Valor total:</h3>
-        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">801.00 R$ À vista</p>
-        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">ou</p>
-        <p id="ValorDaTotal" class="fs-4 m-0 ValorDaTotal">10x de 80,10 R$</p>
-
-        <button type="button" class="btn btn-roxo mt-1">Finalizar Compra</button>
+      <section class="bg-cor rounded border shadow d-flex flex-column align-items-center col-12 col-md-6 mt-3 mt-md-0 pt-2 detalhesDaCompra">
+        <h3 class="valor-cart-sem-desconto">Valor sem desconto: <strong>1000,00 R$</strong></h3>
+        <h3 class="valor-cart-com-desconto">Valor do desconto: <strong>- 199,00 R$</strong></h3>
+        <h3 id="ValorDaTotalTitulo" class="valor-cart-total m-0 pt-3 border-top border-secondary">Valor total: <strong>801,00 R$</strong> À vista</h3>
+        <h3 class="m-0 valor-cart-total">ou</h3>
+        <h3 class="m-0 valor-cart-total border-bottom pb-2 border-secondary">10x de <strong>80,10 R$</strong></h3>
+        <button type="button" class="valor-cart-parcelado btn btn-lg btn-roxo mt-2">Finalizar Compra</button>
       </section >
     </section >
   </aside>
