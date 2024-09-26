@@ -11,28 +11,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./style.css">
   <script defer src="js/scripts.js"></script>
   <script defer src="js/server/serverPromo.js"></script>
   <script defer src="js/server/User.js"></script>
+  <script defer src="js/server/cart.js"></script>
 </head>
 
 <body data-bs-theme="light">
 
   <header>
-    <nav class="navbar-expand-lg navbar backPadrao fixed-top p-0 border-bottom">
+    <nav class="navbar-expand-lg navbar backPadrao fixed-top p-0 border-bottom" role="navigation">
       <div class="container-fluid nav-cont bg-cor">
-        <a class="navbar-brand p-0"><img class="img-fluid img-img mx-5" src="./assets/GrindZone_logo.png"
-          style="max-width: 180px;" alt="Logo da cafeteria Serenatto"></a>
+        <a class="navbar-brand p-0" href="#">
+          <img class="img-fluid img-img mx-5" src="./assets/GrindZone_logo.png" style="max-width: 180px;"
+            alt="GrindZone Logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header bg-cor">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img class="img-fluid img-img mt-5"
-                src="./assets/GrindZone_logo.png" style="max-width: 300px;" alt="Logo da cafeteria Serenatto"></h5>
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              <img class="img-fluid img-img mt-5" src="./assets/GrindZone_logo.png" style="max-width: 300px;"
+                alt="GrindZone Logo">
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
@@ -44,32 +49,33 @@
                 <a class="nav-link nav-link-promocao" href="#promocao">Promoções</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link nav-link-produtos" href="#contato">Contato</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link nav-link-produtos" href="produtos.html">Produtos</a>
               </li>
               <li id="user-section" class="dropdown">
                 <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button"
-                  data-bs-toggle="dropdown">Perfil</button>
+                  data-bs-toggle="dropdown">
+                  Perfil
+                </button>
                 <ul class="dropdown-menu">
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" style="display: block;"
-                      data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" data-bs-toggle="modal"
+                      data-bs-target="#modal-perfil">Entrar</a></li>
                   <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#"
-                      style="display: block;" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a>
-                  </li>
+                      data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a></li>
                   <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;"
                       data-bs-target="#logout-button">Sair</a></li>
                   <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;"
                       data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a>
-                  </li>
+                      aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="modo-noturno">
-                    <label class="form-check-label" for="modo-noturno">Modo noturno</label>
-                  </div>
-                </a>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="modo-noturno">
+                  <label class="form-check-label" for="modo-noturno">Modo noturno</label>
+                </div>
               </li>
             </ul>
           </div>
@@ -79,9 +85,16 @@
   </header>
 
   <main id="categorias">
-
     <section id="carouselExampleAutoplaying" class="carousel trade carousel-dark slide mt-5 pt-2"
       data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0"
+          class="active carrouselSlide bg-white" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1"
+          class="bg-white carrouselSlide" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2"
+          class="bg-white carrouselSlide" aria-label="Slide 3"></button>
+      </div>
       <div class="carousel-inner border-bottom">
         <div class="carousel-item active">
           <img src="./assets/desktop/banner_1_home.png" class="d-none d-xl-block banner-home img-fluid" alt="...">
@@ -105,84 +118,93 @@
             class="banner-home d-flex justify-content-center img-fluid d-md-none" alt="">
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </section>
 
-    <h2 class="text-center m-0 py-3 py-xl-5 backPadrao">Busque por categoria:</h2>
+    <section class="text-center backPadrao" id="promocao">
+      <h2 class="m-0 py-3 py-xl-5">Busque por categoria:</h2>
 
-    <article class="container row mx-auto g-4" id="promocao">
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Moletom">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/moletom-grizzly.png">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text fw-bold">Moletom</h5>
+      <article class="container row mx-auto g-4">
+        <div class="col-6 col-md-4 col-xxl-2" id="Moletom" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/moletom-grizzly.png" alt="Moletom Grizzly">
+              <figcaption class="visually-hidden">Moletom Grizzly</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Moletom</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Shape">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/shape-maple-cbgang.jpg">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text fw-bold">Shape</h5>
+        <div class="col-6 col-md-4 col-xxl-2" id="Shape" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/shape-maple-cbgang.jpg" alt="Shape Maple CBGang">
+              <figcaption class="visually-hidden">Shape Maple CBGang</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Shape</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Truck">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/truck-independent-149mm.png">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text text-ctg fw-bold">Truck</h5>
+        <div class="col-6 col-md-4 col-xxl-2" id="Truck" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/truck-independent-149mm.png" alt="Truck Independent 149mm">
+              <figcaption class="visually-hidden">Truck Independent 149mm</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Truck</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Rolamento">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/rolamento-independent.png">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text fw-bold">Rolamento</h5>
+        <div class="col-6 col-md-4 col-xxl-2" id="Rolamento" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/rolamento-independent.png" alt="Rolamento Independent">
+              <figcaption class="visually-hidden">Rolamento Independent</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Rolamento</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Rodinha">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/rodinha-lyons-54mm.png">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text fw-bold">Roda</h5>
+        <div class="col-6 col-md-4 col-xxl-2" id="Rodinha" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/rodinha-lyons-54mm.png" alt="Rodinha Lyons 54mm">
+              <figcaption class="visually-hidden">Rodinha Lyons 54mm</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Roda</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 col-md-4 col-xxl-2 btn" id="Tênis">
-        <div class="card p-0 align-items-center">
-          <img class="card-img" alt="" src="./assets/tenis-globe-tilt.png">
-          <div class="card-body card-header btn-roxo w-100">
-            <h5 class="text-center card-text fw-bold">Tênis</h5>
+        <div class="col-6 col-md-4 col-xxl-2" id="Tênis" role="button" tabindex="0">
+          <div class="card p-0 align-items-center">
+            <figure>
+              <img class="card-img" src="./assets/tenis-globe-tilt.png" alt="Tênis Globe Tilt">
+              <figcaption class="visually-hidden">Tênis Globe Tilt</figcaption>
+            </figure>
+            <div class="card-body card-header btn-roxo w-100">
+              <h5 class="text-center card-text fw-bold">Tênis</h5>
+            </div>
           </div>
         </div>
-      </div>
-
-    </article>
+      </article>
+    </section>
 
 
     <h2 class="text-center py-3 py-xl-5 backPadrao">Produtos na promoção!</h2>
 
     <section class="container row mx-auto g-4" id="produtos-promocao">
-
-
     </section>
 
     <article class="d-flex justify-content-center py-5">
-      <li rel="stylesheet" class="nav-item btn btn-roxo rounded-1 fs-4 rounded-4 mx-2" type="button"><a target="_blank"
-          href="produtos.html" class="nav-link px-4">Ver todos os nossos Produtos<i
-            class="bi bi-arrow-right-square ps-2"></i></a></li>
+      <a href="produtos.html" class="btn btn-roxo ver-todos-produtos shadow border fw-bold p-2 px-4 rounded-3 mx-2" role="button"
+        target="_blank" aria-label="Ver todos os nossos produtos">
+        Ver todos os nossos Produtos
+        <i class="bi bi-arrow-right-square ps-2"></i>
+      </a>
     </article>
 
     <section class="py-4 container">
@@ -190,42 +212,47 @@
         <div class="col-10 col-xl-8 mx-auto">
           <div class="border border-2 rounded p-3 nav-cont">
             <h3 class="fw-bold p-3">Entre em contato!</h3>
-            <form id="contato">
+            <form id="contato" aria-labelledby="contactForm">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingNome" placeholder="Nome">
+                <input type="text" class="form-control" id="floatingNome" placeholder="Nome" required>
                 <label for="floatingNome">Nome</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" required>
                 <label for="floatingEmail">Email</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="floatingTelefone" placeholder="Felefone">
+                <input type="tel" class="form-control" id="floatingTelefone" placeholder="Telefone" required>
                 <label for="floatingTelefone">Telefone</label>
               </div>
-              <select class="form-select mb-4" aria-label="Default select example">
-                <option selected>Preferência de contato</option>
-                <option value="1">Whatsapp</option>
-                <option value="2">Email</option>
-                <option value="3">Ligação</option>
-              </select>
-              <label for="customRange1" class="form-label">Nível de satisfação</label>
-              <input type="range" class="form-range input-range " id="nivel-satisfacao">
-              <div class="form-check">
+              <div class="mb-4">
+                <label for="preferenciaContato" class="form-label">Preferência de contato</label>
+                <select class="form-select" id="preferenciaContato" aria-label="Preferência de contato">
+                  <option selected disabled>Escolha uma opção</option>
+                  <option value="whatsapp">Whatsapp</option>
+                  <option value="email">Email</option>
+                  <option value="ligacao">Ligação</option>
+                </select>
+              </div>
+              <label for="nivel-satisfacao" class="form-label">Nível de satisfação</label>
+              <input type="range" class="form-range" id="nivel-satisfacao" min="0" max="10" aria-valuemin="0"
+                aria-valuemax="10" aria-label="Nível de satisfação">
+              <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
-                  Dejesa receber novidades por email?
+                  Deseja receber novidades por email?
                 </label>
               </div>
-              <button type="button" class="btn botao-padrao w-100 fw-bold mt-3 py-3">Enviar</button>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-roxo w-50 text-center fw-bold mt-3 py-2">Enviar</button>
+              </div>
             </form>
           </div>
         </div>
       </article>
     </section>
 
-
-    <footer>
+    <footer id="contato">
       <footer class="text-center rodape btn-roxo">
         <section class="container p-4 pb-0">
           <a href="https://wa.me/5511953946555" class="btn btn-lg btn-roxo" target="_blank"><i
@@ -247,36 +274,81 @@
   <!-- OffCanvas-Cart -->
 
   <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <header class="offcanvas-header bg-cor">
-      <h2 class="offcanvas-title" id="offcanvasRightLabel">Seu carrinho</h2>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <header class="bg-cor text-center py-3 d-flex offcanvas-header" style="height: 80px;">
+      <h2 class="fs-5 m-0 ps-3 d-flex align-items-center">Carrinho de compras do <b id="nome_usuario"
+          class="fw-semibold"></b></h2>
+      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="offcanvas"
+        aria-label="Fechar"></button>
     </header>
-    <section class="offcanvas-body d-flex align-items-center">
-      <div class="d-flex flex-column col-12 col-md-6 cart-items">
-        <h3 class="top-0">Todos os itens:</h3>
-        <article style="max-height: 120px;" class="d-flex py-1 border rounded cart-item">
-          <img class="image-cart" src="/assets/shape-maple-cbgang.jpg" alt="shape">
-          <div class="d-flex justify-content-between w-100 p-1">
-            <div class="d-flex descricao-itens-cart flex-column">
-              <h5 class="product-cart-name fw-semibold">Shape CB Gang</h5>
-                <p class="descricao-item-cart fs-6 fw-light"></p>
+    <main class="container-lg py-4 p-lg-4">
+      <div class="row">
+        <section class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="font-cart-th">Produto</th>
+                <th class="font-cart-th">Preço</th>
+                <th class="font-cart-th">Quantidade</th>
+                <th class="font-cart-th">Total</th>
+                <th class="font-cart-th">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="my-auto">
+                <td>
+                  <div class="product d-flex align-items-center">
+                    <img src="https://picsum.photos/100/120" alt="Nome do produto" class="img-fluid rounded">
+                    <div class="info ms-3 d-none d-lg-block">
+                      <div class="name h5">Nome do produto</div>
+                      <div class="category text-muted">Categoria</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="font-cart-td"><strong>R$</strong> 120</td>
+                <td class="font-cart-td">
+                  <div class="qty d-flex flex-lg-row align-items-center bg-light rounded d-inline-flex rounded-lg-pill">
+                    <button class="btn p-0 px-2" aria-label="Remover um item"><i class="bi bi-dash"></i></button>
+                    <span class="my-2 my-lg-0 mx-2">2</span>
+                    <button class="btn p-0 px-2" aria-label="Adicionar um item"><i class="bi bi-plus"></i></button>
+                  </div>
+                </td>
+                <td class="font-cart-td"><strong>R$</strong> 240</td>
+                <td class="font-cart-td">
+                  <button class="btn btn-danger rounded-circle" aria-label="Remover item do carrinho"><i
+                      class="bi bi-x"></i></button>
+                </td>
+                <div class="info ms-1 d-lg-none border-top pt-2">
+                  <div class="name h5">Nome do produto</div>
+                  <div class="category text-muted">Categoria</div>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <aside class="col-md-3">
+          <div class="box mb-3 border bg-light">
+            <header class="p-3 mb-0 border-bottom h5 resumo-da-compra">Resumo da compra</header>
+            <div class="info p-3 resumo-da-compra">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Sub-total</span><span><strong>R$</strong> 418</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span><i class="bi bi-dash"></i>Frete</span><span>Gratuito</span>
+              </div>
+              <div>
+                <button class="btn btn-link letra-roxa p-0">
+                  Adicionar cupom de desconto <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
             </div>
-            <div id="valor-item" class="d-flex flex-column align-items-center justify-content-end">
-              <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">200,00 R$</span>
-              <span id="product-cart-price" class="product-cart-price">200,00 R$</span>
-            </div>
+            <footer class="p-3 bg-secondary text-white d-flex justify-content-between">
+              <span>Total</span><span><strong>R$</strong> 418</span>
+            </footer>
           </div>
-        </article>
+          <button class="btn btn-roxo w-100 py-3 text-uppercase">Finalizar Compra</button>
+        </aside>
       </div>
-      <section class="bg-cor rounded border shadow d-flex flex-column align-items-center col-12 col-md-6 mt-3 mt-md-0 pt-2 detalhesDaCompra">
-        <h3 class="valor-cart-sem-desconto">Valor sem desconto: <strong>1000,00 R$</strong></h3>
-        <h3 class="valor-cart-com-desconto">Valor do desconto: <strong>- 199,00 R$</strong></h3>
-        <h3 id="ValorDaTotalTitulo" class="valor-cart-total m-0 pt-3 border-top border-secondary">Valor total: <strong>801,00 R$</strong> À vista</h3>
-        <h3 class="m-0 valor-cart-total">ou</h3>
-        <h3 class="m-0 valor-cart-total border-bottom pb-2 border-secondary">10x de <strong>80,10 R$</strong></h3>
-        <button type="button" class="valor-cart-parcelado btn btn-lg btn-roxo mt-2">Finalizar Compra</button>
-      </section >
-    </section >
+    </main>
   </aside>
 
   <!-- MODAL LOGIN -->
@@ -286,38 +358,44 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-        <div class="d-flex justify-content-center pt-4">
-          <h1 class="modal-title text-center fs-4 fw-bold" id="modalLabel">Login</h1>
-        </div>
-        <div class="modal-body">
+          aria-label="Fechar"></button>
+        <header>
+          <h1 class="modal-title pt-4 text-center fs-4 fw-bold" id="modalLabel">Login</h1>
+        </header>
+        <main class="modal-body">
           <form id="login-form" action="/login" method="post">
-            <fieldset>
-              <div class="mb-3">
-                <input type="email" id="login-email" name="login-email" autocomplete="username"
-                  class="bg-light-grey form-control" placeholder="Email" required>
+            <fieldset class="mb-3">
+              <legend class="visually-hidden">Informações de Login</legend>
+
+              <div class="form-floating mb-3">
+                <input type="email" id="login-email" name="login-email" autocomplete="username" class="form-control"
+                  placeholder="Email" required>
+                <label for="login-email">Email</label>
               </div>
-              <div class="mb-3">
+
+              <div class="form-floating mb-3">
                 <input type="password" id="login-password" autocomplete="current-password" name="login-password"
-                  class="bg-light-grey form-control" placeholder="Senha" required>
+                  class="form-control" placeholder="Senha" required>
+                <label for="login-password">Senha</label>
               </div>
+
               <div class="d-flex justify-content-center pt-3 gap-2">
                 <button type="submit" class="btn btn-roxo col-6">Entrar</button>
               </div>
             </fieldset>
           </form>
-        </div>
-        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-          <strong class="font-black text-decoration-none">Não tem uma conta?
-            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
-              class="p-1 fw-semibold text-decoration-none letra-roxa">
-              Registre-se!
-            </a></strong>
-        </div>
+        </main>
+        <footer>
+          <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+            <strong class="font-black text-decoration-none">Não tem uma conta?
+              <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
+                class="p-1 fw-semibold text-decoration-none letra-roxa">Registre-se!</a>
+            </strong>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
-
 
   <!-- MODAL REGISTRO  -->
 
@@ -326,43 +404,52 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-        <div class="d-flex justify-content-center pt-4">
-          <h1 class="modal-title text-center fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
-        </div>
-        <div class="modal-body">
+          aria-label="Fechar"></button>
+        <header>
+          <h1 class="modal-title text-center pt-4 fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
+        </header>
+        <main class="modal-body">
           <form id="register-form" data-formulario>
             <fieldset class="mb-3">
-              <input name="register-name" id="register-name" class="bg-light-grey form-control"
-                placeholder="Nome de usuário" type="text" minlength="3" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <legend class="visually-hidden">Informações do Registro</legend>
 
-            <fieldset class="mb-3">
-              <input name="register-email" id="register-email" autocomplete="username"
-                class="bg-light-grey form-control" placeholder="Email" type="email" minlength="4" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <div class="form-floating mb-3">
+                <input name="register-name" id="register-name" class="form-control" placeholder="Nome de usuário"
+                  type="text" minlength="3" required />
+                <label for="register-name">Nome de usuário</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
 
-            <fieldset class="mb-3">
-              <input name="register-password" id="register-password" autocomplete="new-password"
-                class="bg-light-grey form-control" placeholder="Senha" type="password" minlength="4" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <div class="form-floating mb-3">
+                <input name="register-email" id="register-email" autocomplete="username" class="form-control"
+                  placeholder="Email" type="email" minlength="4" required />
+                <label for="register-email">Email</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
 
-            <fieldset class="mb-3">
-              <input name="register-confirm-password" id="register-confirm-password" autocomplete="new-password"
-                class="bg-light-grey form-control" type="password" placeholder="Confirmar senha" minlength="4"
-                required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
-            <fieldset class="form-check mb-3">
-              <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
-              <label class="form-check-label" for="termos">
-                Li e estou ciente quanto às condições de tratamento dos meus dados conforme
-                descrito na Política de Privacidade.
-              </label>
-              <span class="mensagem-erro text-danger"></span>
+              <div class="form-floating mb-3">
+                <input name="register-password" id="register-password" autocomplete="new-password" class="form-control"
+                  placeholder="Senha" type="password" minlength="4" required />
+                <label for="register-password">Senha</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input name="register-confirm-password" id="register-confirm-password" autocomplete="new-password"
+                  class="form-control" type="password" placeholder="Confirmar senha" minlength="4" required />
+                <label for="register-confirm-password">Confirmar senha</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
+
+              <fieldset class="form-check mb-3">
+                <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
+                <label class="form-check-label" for="termos">
+                  Li e estou ciente quanto às condições de tratamento dos meus dados conforme
+                  descrito na Política de Privacidade.
+                </label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </fieldset>
+
             </fieldset>
 
             <div class="d-flex justify-content-center pt-3 gap-2">
@@ -370,14 +457,15 @@
                 data-botao-enviar>Confirmar</button>
             </div>
           </form>
-        </div>
-        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-          <strong class="font-black text-decoration-none">Ja tem uma conta?
-            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
-              class="p-1 fw-semibold text-decoration-none letra-roxa">
-              Entre!
-            </a></strong>
-        </div>
+        </main>
+        <footer>
+          <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+            <strong class="font-black text-decoration-none">Já tem uma conta?
+              <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
+                class="p-1 fw-semibold text-decoration-none letra-roxa">Entre!</a>
+            </strong>
+          </div>
+        </footer>
       </div>
     </div>
   </div>

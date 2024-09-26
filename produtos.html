@@ -16,23 +16,28 @@
   <script defer src="js/scripts.js"></script>
   <script defer src="js/server/serverProducts.js"></script>
   <script defer src="js/server/User.js"></script>
+  <script defer src="js/server/cart.js"></script>
 </head>
 
 <body class="d-flex flex-column flex-wrap-sm min-vh-100" data-bs-theme="light">
 
   <header>
-    <nav class="navbar-expand-lg navbar backPadrao fixed-top p-0 border-bottom">
+    <nav class="navbar-expand-lg navbar backPadrao fixed-top p-0 border-bottom" role="navigation">
       <div class="container-fluid nav-cont bg-cor">
-        <a class="navbar-brand p-0"><img class="img-fluid img-img mx-5" src="./assets/GrindZone_logo.png"
-          style="max-width: 180px;" alt="Logo da cafeteria Serenatto"></a>
+        <a class="navbar-brand p-0" href="#">
+          <img class="img-fluid img-img mx-5" src="./assets/GrindZone_logo.png" style="max-width: 180px;"
+            alt="GrindZone Logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header bg-cor">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img class="img-fluid img-img mt-5"
-                src="./assets/GrindZone_logo.png" style="max-width: 300px;" alt="Logo da cafeteria Serenatto"></h5>
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              <img class="img-fluid img-img mt-5" src="./assets/GrindZone_logo.png" style="max-width: 300px;"
+                alt="GrindZone Logo">
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
@@ -41,28 +46,21 @@
                 <a class="nav-link nav-link-produtos" href="index.html">Home</a>
               </li>
               <li id="user-section" class="dropdown">
-                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button"
-                  data-bs-toggle="dropdown">Perfil</button>
+                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button" data-bs-toggle="dropdown">
+                  Perfil
+                </button>
                 <ul class="dropdown-menu">
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" style="display: block;"
-                      data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#"
-                      style="display: block;" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a>
-                  </li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;"
-                      data-bs-target="#logout-button">Sair</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;"
-                      data-bs-target="#modal-cart">Carrinho<i class="bi bi-cart2 ms-2"></i></a>
-                  </li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;" data-bs-target="#logout-button">Sair</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="modo-noturno">
-                    <label class="form-check-label" for="modo-noturno">Modo noturno</label>
-                  </div>
-                </a>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="modo-noturno">
+                  <label class="form-check-label" for="modo-noturno">Modo noturno</label>
+                </div>
               </li>
             </ul>
           </div>
@@ -70,7 +68,7 @@
       </div>
     </nav>
   </header>
-
+  
   <main class="by d-flex flex-column flex-md-row flex-wrap-sm flex-grow-1 ">
     <div class="col-12 col-md-4 col-xxl-2 d-flex sidebar p-3 flex-column">
       <h4>Filtros</h4>
@@ -108,64 +106,72 @@
         <button type="button" id="aplicarFiltros" class="btn w-100 my-1 btn-roxo border-0">Aplicar Filtros</button>
       </form>
     </div>
-    <section id="produtos" class="d-flex justify-content-center p-2 p-lg-4 h-100 col-12 col-md-8 col-xxl-10 row mx-auto gap-3 gap-xxl-5">
+    <section id="produtos" class="d-flex justify-content-center py-2 h-100 col-12 col-md-8 col-xxl-10 row mx-auto gap-1 gap-lg-3 gap-xxl-5">
     </section>
   </main>
 
-  <footer class="mt-auto text-center btn-roxo">
-    <section class="container p-4 pb-0">
-      <a href="https://wa.me/5511953946555" class="btn btn-lg btn-roxo" target="_blank"><i
-          class="bi bi-whatsapp"></i></a>
-      <a href="https://www.linkedin.com/in/henrique-guimar%C3%A3es-35426b233/" class="btn btn-lg btn-roxo"
-        target="_blank"><i class="bi bi-linkedin"></i></a>
-      <a href="https://github.com/Henrique010101" class="btn btn-lg btn-roxo" target="_blank"><i
-          class="bi bi-github"></i></a>
-    </section>
-    <article class="p-3">
-      <p>2024 <i class="bi bi-c-circle"></i> Desenvolvido por Henrique Guimarães Moreno | Projeto fictício sem fins
-        comerciais.</p>
-    </article>
-  </footer>
+    <footer id="contato">
+      <footer class="text-center rodape btn-roxo">
+        <section class="container p-4 pb-0">
+          <a href="https://wa.me/5511953946555" class="btn btn-lg btn-roxo" target="_blank"><i
+              class="bi bi-whatsapp"></i></a>
+          <a href="https://www.linkedin.com/in/henrique-guimar%C3%A3es-35426b233/" class="btn btn-lg btn-roxo"
+            target="_blank"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/Henrique010101" class="btn btn-lg btn-roxo" target="_blank"><i
+              class="bi bi-github"></i></a>
+        </section>
+        <article class="p-3">
+          <p>2024 <i class="bi bi-c-circle"></i> Desenvolvido por Henrique Guimarães Moreno | Projeto fictício sem fins
+            comerciais.</p>
+        </article>
+      </footer>
+    </footer>
 
   <!-- MODAL LOGIN -->
 
   <div class="modal fade" id="modal-perfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-        <div class="d-flex justify-content-center pt-4">
-          <h1 class="modal-title text-center fs-4 fw-bold" id="modalLabel">Login</h1>
-        </div>
-        <div class="modal-body">
-          <form id="login-form" action="/login" method="post">
-            <fieldset>
-              <div class="mb-3">
-                <input type="email" id="login-email" name="login-email" autocomplete="username"
-                  class="bg-light-grey form-control" placeholder="Email" required>
-              </div>
-              <div class="mb-3">
-                <input type="password" id="login-password" autocomplete="current-password" name="login-password"
-                  class="bg-light-grey form-control" placeholder="Senha" required>
-              </div>
-              <div class="d-flex justify-content-center pt-3 gap-2">
-                <button type="submit" class="btn btn-roxo col-6">Entrar</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-          <strong class="font-black text-decoration-none">Não tem uma conta?
-            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
-              class="p-1 fw-semibold text-decoration-none letra-roxa">
-              Registre-se!
-            </a></strong>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="modal-content">
+            <button type="button" class="btn-close position-absolute top-0 end-0 p-3" 
+                data-bs-dismiss="modal" aria-label="Fechar"></button>
+            <header>
+                <h1 class="modal-title pt-4 text-center fs-4 fw-bold" id="modalLabel">Login</h1>
+            </header>
+            <main class="modal-body">
+                <form id="login-form" action="/login" method="post">
+                    <fieldset class="mb-3">
+                        <legend class="visually-hidden">Informações de Login</legend>
 
+                        <div class="form-floating mb-3">
+                            <input type="email" id="login-email" name="login-email" autocomplete="username"
+                                class="form-control" placeholder="Email" required>
+                            <label for="login-email">Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" id="login-password" autocomplete="current-password" 
+                                name="login-password" class="form-control" placeholder="Senha" required>
+                            <label for="login-password">Senha</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center pt-3 gap-2">
+                            <button type="submit" class="btn btn-roxo col-6">Entrar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </main>
+            <footer>
+                <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+                    <strong class="font-black text-decoration-none">Não tem uma conta?
+                        <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-registro"
+                            class="p-1 fw-semibold text-decoration-none letra-roxa">Registre-se!</a>
+                    </strong>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
 
   <!-- MODAL REGISTRO  -->
 
@@ -174,43 +180,52 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-        <div class="d-flex justify-content-center pt-4">
-          <h1 class="modal-title text-center fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
-        </div>
-        <div class="modal-body">
+          aria-label="Fechar"></button>
+        <header>
+          <h1 class="modal-title text-center pt-4 fs-4 fw-bold" id="modalRegistroLabel">Registro</h1>
+        </header>
+        <main class="modal-body">
           <form id="register-form" data-formulario>
             <fieldset class="mb-3">
-              <input name="register-name" id="register-name" class="bg-light-grey form-control"
-                placeholder="Nome de usuário" type="text" minlength="3" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <legend class="visually-hidden">Informações do Registro</legend>
 
-            <fieldset class="mb-3">
-              <input name="register-email" id="register-email" autocomplete="username"
-                class="bg-light-grey form-control" placeholder="Email" type="email" minlength="4" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <div class="form-floating mb-3">
+                <input name="register-name" id="register-name" class="form-control" placeholder="Nome de usuário"
+                  type="text" minlength="3" required />
+                <label for="register-name">Nome de usuário</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
 
-            <fieldset class="mb-3">
-              <input name="register-password" id="register-password" autocomplete="new-password"
-                class="bg-light-grey form-control" placeholder="Senha" type="password" minlength="4" required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
+              <div class="form-floating mb-3">
+                <input name="register-email" id="register-email" autocomplete="username" class="form-control"
+                  placeholder="Email" type="email" minlength="4" required />
+                <label for="register-email">Email</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
 
-            <fieldset class="mb-3">
-              <input name="register-confirm-password" id="register-confirm-password" autocomplete="new-password"
-                class="bg-light-grey form-control" type="password" placeholder="Confirmar senha" minlength="4"
-                required />
-              <span class="mensagem-erro text-danger"></span>
-            </fieldset>
-            <fieldset class="form-check mb-3">
-              <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
-              <label class="form-check-label" for="termos">
-                Li e estou ciente quanto às condições de tratamento dos meus dados conforme
-                descrito na Política de Privacidade.
-              </label>
-              <span class="mensagem-erro text-danger"></span>
+              <div class="form-floating mb-3">
+                <input name="register-password" id="register-password" autocomplete="new-password" class="form-control"
+                  placeholder="Senha" type="password" minlength="4" required />
+                <label for="register-password">Senha</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input name="register-confirm-password" id="register-confirm-password" autocomplete="new-password"
+                  class="form-control" type="password" placeholder="Confirmar senha" minlength="4" required />
+                <label for="register-confirm-password">Confirmar senha</label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </div>
+
+              <fieldset class="form-check mb-3">
+                <input name="termos" class="form-check-input" type="checkbox" id="termos" required>
+                <label class="form-check-label" for="termos">
+                  Li e estou ciente quanto às condições de tratamento dos meus dados conforme
+                  descrito na Política de Privacidade.
+                </label>
+                <span class="mensagem-erro text-danger" aria-live="assertive"></span>
+              </fieldset>
+
             </fieldset>
 
             <div class="d-flex justify-content-center pt-3 gap-2">
@@ -218,38 +233,47 @@
                 data-botao-enviar>Confirmar</button>
             </div>
           </form>
-        </div>
-        <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
-          <strong class="font-black text-decoration-none">Ja tem uma conta?
-            <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
-              class="p-1 fw-semibold text-decoration-none letra-roxa">
-              Entre!
-            </a></strong>
-        </div>
+        </main>
+        <footer>
+          <div class="d-flex pb-4 align-items-center justify-content-center flex-column">
+            <strong class="font-black text-decoration-none">Já tem uma conta?
+              <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-perfil"
+                class="p-1 fw-semibold text-decoration-none letra-roxa">Entre!</a>
+            </strong>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
 
-  <!-- Modal-Cart -->
+  <!-- OffCanvas-Cart -->
+   
+  <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <header class="offcanvas-header bg-cor">
+      <h2 class="offcanvas-title" id="offcanvasRightLabel">Seu carrinho</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </header>
+    <section class="offcanvas-body d-flex align-items-center">
 
-  <div class="modal fade" id="modal-cart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Seu carrinho</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+      <h1 class="semProduto align-items-center justify-content-between">Não há nenhum produto no carrinho</h1>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-roxo">Finalizar compra</button>
-        </div>
+      <div class="d-flex flex-column col-12 col-md-6 cart-items">
+        <h3 class="top-0">Todos os itens:</h3>
       </div>
-    </div>
-  </div>
+      <article></article>
+      <section
+        class="bg-cor rounded border shadow d-flex flex-column align-items-center col-12 col-md-6 mt-3 mt-md-0 pt-2 detalhesDaCompra">
+        <h3 class="valor-cart-sem-desconto">Valor sem desconto: <strong>1000,00 R$</strong></h3>
+        <h3 class="valor-cart-com-desconto">Valor do desconto: <strong>- 199,00 R$</strong></h3>
+        <h3 id="ValorDaTotalTitulo" class="valor-cart-total m-0 pt-3 border-top border-secondary">Valor total:
+          <strong>801,00 R$</strong> À vista</h3>
+        <h3 class="m-0 valor-cart-total">ou</h3>
+        <h3 class="m-0 valor-cart-total border-bottom pb-2 border-secondary">10x de <strong>80,10 R$</strong></h3>
+        <button type="button" class="valor-cart-parcelado btn btn-lg btn-roxo mt-2 justify-content-end">Finalizar
+          Compra</button>
+      </section>
+    </section>
+  </aside>
 
   </main>
 

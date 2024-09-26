@@ -64,99 +64,88 @@ async function renderizarProdutos() {
             const modalId = `modal-${produto._id}`;
             const valorTotal = produto.price * (1 - produto.promocao / 100);
             html += `
-                <div class="col-5 col-xl-3 col-xxl-2 btn text-start p-0">
+                <div class="card-todos-produtos  btn text-start p-0">
                     <div class="card p-0 align-items-center h-100 d-flex flex-column">
-                        <img class="card-img-produtos" data-bs-toggle="modal" data-bs-target="#${modalId}"
-                            alt="${produto.name}" src="http://localhost:3000/${produto.img}">
-                        <div class="card-body card-header ps-2 pt-2 px-1 w-100 d-flex flex-column">
-                            <h5 class="fs-6 titulo-produto text-center fw-bold">${produto.name}</h5>
-                            <ul class="ul-produtos">
-                                <li class="mt-1">${produto.description.replace(/,/g, '<br>')}</li>
-                            </ul>
-                            <div class="mt-auto d-flex justify-content-between align-items-center w-100">
-                                <div>
-                                    <span class="preco-parcelado text-black-50">
-                                        10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
-                                    </span>
-                                    <span class="preco-total">
-                                        <br>
-                                        ${produto.promocao > 0 ?
-                    `<strong class="preco-promo fw-light text-decoration-line-through text-black-50">
-                                            R$ ${produto.price.toFixed(2)}
-                                        </strong>
-                                        <br>` :
-                    ''}
-                                        <strong>R$</strong> ${valorTotal.toFixed(2)}
-                                    </span>
-                                </div>
-                                <a href="#" type="button" class="btn btn-roxo btn-custom">+ <i class="bi bi-cart2"></i></a>
-                            </div>
+                    <img class="card-img-produtos" data-bs-toggle="modal" data-bs-target="#${modalId}" alt="${produto.name}" src="http://localhost:3000/${produto.img}">
+                    <div class="card-body card-header ps-2 pt-2 px-1 w-100 d-flex flex-column">
+                        <h5 class="fs-6 titulo-produto text-center fw-bold">${produto.name}</h5>
+                        <ul class="ul-produtos">
+                        <li class="mt-1">${produto.description.replace(/,/g, '<br>')}</li>
+                        </ul>
+                        <div class="mt-auto d-flex justify-content-between align-items-center w-100">
+                        <div>
+                            <span class="preco-parcelado text-black-50">
+                            10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
+                            </span>
+                            <span class="preco-total">
+                            <br>
+                            ${produto.promocao > 0 ? `
+                                <strong class="preco-promo fw-light text-decoration-line-through text-black-50">
+                                R$ ${produto.price.toFixed(2)}
+                                </strong>
+                                <br>` : ''
+                                }
+                            <strong>R$</strong> ${valorTotal.toFixed(2)}
+                            </span>
                         </div>
+                        <a href="#" class="btn btn-roxo btn-custom add-to-cart" data-produto-id="${produto._id}" aria-label="Adicionar ${produto.name} ao carrinho">+ <i class="bi bi-cart2"></i></a>
+                        </div>
+                    </div>
                     </div>
                 </div>
 
-                  <!-- Modal -->
-
+                <!-- Modal -->
                 <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                         </div>
                         <div class="modal-body">
                         <div id="carousel-${modalId}" class="carousel slide carousel-dark" data-bs-ride="carousel">
-                           <div class="carousel-inner">
+                            <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto"
-                                alt="${produto.name} - Imagem 1">
+                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto"
-                                alt="${produto.name} - Imagem 2">
+                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto"
-                                alt="${produto.name} - Imagem 3">
+                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 3">
                             </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${modalId}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
                             </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carousel-${modalId}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
                             </button>
                         </div>
                         <div class="mt-3 d-flex flex-column">
-                            <h5 class="modal-title my-2 fs-4 fw-bold text-center" id="${modalId}Labe16">${produto.name}</h5>
-
-                            <ul>
-                                <div>${produto.description.replace(/,/g, '<br>')}</div>
-                            </ul>
+                            <h5 class="modal-title my-2 fs-4 fw-bold text-center" id="${modalId}Label">${produto.name}</h5>
+                            <div>${produto.description.replace(/,/g, '<br>')}</div>
                         </div>
                         </div>
                         <div class="modal-footer">
                         <div class="me-auto">
-                            <span class="preco-promo ">
-                                10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
+                            <span class="preco-promo">
+                            10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
                             </span>
-                            <span class="">
-                                        <br>
-                                        ${produto.promocao > 0 ?
-                    `<strong class="text-decoration-line-through text-black-50">
-                                            R$ ${produto.price.toFixed(2)}
-                                        </strong>
-                                        <br>` :
-                    ''}
-                                        <strong>R$</strong> ${valorTotal.toFixed(2)}
-                                    </span>
                             <span>
                             <br>
+                            ${produto.promocao > 0 ? `
+                                <strong class="text-decoration-line-through text-black-50">
+                                R$ ${produto.price.toFixed(2)}
+                                </strong>
+                                <br>` : ''
+                                }
+                            <strong>R$</strong> ${valorTotal.toFixed(2)}
                             </span>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-roxo">Adicionar ao carrinho <i class="bi bi-cart2"></i></button>
+                        <button type="button" class="btn btn-roxo add-to-cart" data-produto-id="${produto._id}" aria-label="Adicionar ${produto.name} ao carrinho">Adicionar ao carrinho <i class="bi bi-cart2"></i></button>
                         </div>
                     </div>
                     </div>
@@ -167,7 +156,7 @@ async function renderizarProdutos() {
         todosProdutos.innerHTML = html;
     } catch (err) {
         console.error('Erro ao carregar produtos:', err);
-        todosProdutos.innerHTML = '<p>Não foi possível carregar os produtos.</p>';
+        todosProdutos.innerHTML = '<p class="text-center fs-5">Não foi possível carregar os produtos.</p>';
     }
 }
 

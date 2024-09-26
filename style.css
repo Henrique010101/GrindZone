@@ -8,6 +8,7 @@
    --cor2-light: #FFFF;
    ;
    --cor1-dark: #0E0D0D;
+   --cor2-dark: #1C1C1C;
    --roxo-: #50518C;
  }
 
@@ -25,9 +26,8 @@
    color: var(--roxo-);
  }
 
- .carousel-control-next,
- .carousel-control-prev {
-   width: 4%;
+ .carrouselSlide {
+   border: 2px solid var(--roxo-)!important;
  }
 
  .card-img {
@@ -46,9 +46,17 @@
    width: 100%;
  }
 
+ .card-todos-produtos {
+  width: 20%;
+ }
+
  .ul-produtos {
    list-style: none;
    padding: 0;
+ }
+
+ .ver-todos-produtos {
+  font-size: 1.2rem;
  }
 
  .preco-parcelado {
@@ -61,28 +69,6 @@
 
  .preco-total {
    font-size: 1.1rem;
- }
-
- .product-cart-price {
-   font-size: 1.2rem;
- }
-
- .product-cart-price-promo {
-   font-size: 1.1rem;
- }
-
- .image-cart {
-   max-width: 110px;
-   max-height: 110px;
- }
-
- .product-cart-name {
-   font-size: 1.5rem;
- }
-
- .detalhesDaCompra {
-   justify-content: center !important;
-   height: 70%;
  }
 
  .btn-roxo {
@@ -147,6 +133,9 @@
    .card-img {
      width: 11rem;
    }
+   .card-todos-produtos {
+    width: 30%;
+   }
 
    .banner-home {
      height: 40vh;
@@ -161,40 +150,8 @@
    }
 
    .offcanvas {
-     width: 95% !important;
+     width: 100% !important;
    }
-
-   .detalhesDaCompra {
-    max-height: 50%;
-  }
-
-  .product-cart-name {
-    font-size: 1.2rem;
-  }
-
-  .product-cart-price {
-    font-size: 1.1rem;
-  }
-
-  .product-cart-price-promo {
-    font-size: 1rem;
-  }
-
-  .valor-cart-sem-desconto {
-    font-size: 1.02rem;
-  }
-
-  .valor-cart-com-desconto {
-    font-size: 1.02rem;
-  }
-
-  .valor-cart-total {
-    font-size: 1.02rem;
-  }
-
-  .valor-cart-parcelado {
-    font-size: 1.02rem;
-  }
  }
 
  @media (max-width: 1200px) {
@@ -204,32 +161,8 @@
  }
 
  @media (max-width: 992px) {
-   .product-cart-name {
-     font-size: 1rem;
-   }
-
-   .product-cart-price {
-     font-size: 1rem;
-   }
-
-   .product-cart-price-promo {
-     font-size: 0.9rem;
-   }
-
-   .valor-cart-sem-desconto {
-     font-size: 1.02rem;
-   }
-
-   .valor-cart-com-desconto {
-     font-size: 1.02rem;
-   }
-
-   .valor-cart-total {
-     font-size: 1.02rem;
-   }
-
-   .valor-cart-parcelado {
-     font-size: 1.02rem;
+  .card-todos-produtos {
+    width: 47%;
    }
  }
 
@@ -238,18 +171,14 @@
    .flex-wrap-sm {
      flex-wrap: wrap !important;
    }
-
-   .cart-item {
-     max-width: 100%;
-   }
-
-   .offcanvas-body {
-     flex-direction: column;
-   }
-
+   
    .image-cart {
      max-width: 90px;
      max-height: 90px;
+   }
+
+   .ver-todos-produtos {
+    font-size: 1rem;
    }
  }
 
@@ -300,6 +229,14 @@
    .preco-promo {
      font-size: 0.7rem;
    }
+
+   .font-cart-th {
+     font-size: 0.79rem;
+   }
+
+   .font-cart-td {
+     font-size: 0.79rem;
+   }
  }
 
  [data-bs-theme="dark"] {
@@ -326,10 +263,28 @@
    background-color: var(--cor1-dark);
  }
 
+ [data-bs-theme="dark"] .qty {
+   color: var(--cor1-dark);
+   background-color: #dee2e6;
+ }
+
+ [data-bs-theme="dark"] .bg-white {
+ background-color: var(--cor1-dark)!important;
+}
+
+ [data-bs-theme="dark"] .bi-plus {
+   color: var(--cor1-dark);
+ }
+
+ [data-bs-theme="dark"] .bi-dash {
+   color: var(--cor1-dark);
+ }
+
+ [data-bs-theme="dark"] .resumo-da-compra {
+   background-color: var(--cor2-dark);
+ }
+
+
  [data-bs-theme="dark"] .letra-roxa {
    color: var(--cor2-light);
  }
-
- [data-bs-theme="dark"] .detalhesDaCompra {
-  background-color: var(--cor1-dark);
-}

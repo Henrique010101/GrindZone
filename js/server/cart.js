@@ -1,11 +1,11 @@
-async function addToCart(productId, quatity) {
+async function addToCart(productId, quantity) {
     try {
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ productId, quatity }),
+            body: JSON.stringify({ productId, quantity }), // Adicionando a quantidade
             credentials: 'include',
         });
 
@@ -13,18 +13,20 @@ async function addToCart(productId, quatity) {
 
         if (response.ok) {
             alert(data.message);
+            // Atualiza a exibição do carrinho após adicionar o item
+            await updateCartDisplay();
         } else {
-            alert(data.messsage || 'Erro ao adicionar item ao carrinho.');
+            alert(data.message || 'Erro ao adicionar item ao carrinho.');
         }
     } catch (error) {
         console.error('Erro ao adicionar item ao carrinho:', error);
-        alert('Erroa ao adicionar item ao carrinho.');
+        alert('Erro ao adicionar item ao carrinho.');
     }
 }
 
 async function removeFromCart(productId) {
     try {
-        const response = await fetch('http://localhost:3000/api/cart/${productId}', {
+        const response = await fetch(`http://localhost:3000/api/cart/${productId}`, {
             method: 'DELETE',
             credentials: 'include',
         });
@@ -33,18 +35,17 @@ async function removeFromCart(productId) {
 
         if (response.ok) {
             alert(data.message);
-            updadeCartDisplay();
+            await updateCartDisplay();
         } else {
             alert(data.message || 'Erro ao remover item do carrinho.');
         }
     } catch (error) {
-        console.error('Error ao remover item do carrinho:', error);
+        console.error('Erro ao remover item do carrinho:', error);
         alert('Erro ao remover item do carrinho.');
     }
 }
 
 async function fetchCart() {
-
     try {
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'GET',
@@ -56,49 +57,51 @@ async function fetchCart() {
         if (response.ok) {
             displayCartItems(data);
         } else {
-            alert(data.mesasge || 'Error ao obter itens do carrinho.');
+            alert(data.message || 'Erro ao obter itens do carrinho.');
         }
-    } catch(error) {
+    } catch (error) {
         console.error('Erro ao obter itens do carrinho:', error);
-        alert('erro ao obter itens do carrinho')
+        alert('Erro ao obter itens do carrinho.');
     }
 }
 
 function displayCartItems(cart) {
-    const cartContainer = document.getElementById('');
+    const cartContainer = document.querySelector('.cart-items'); // Seletor atualizado
     cartContainer.innerHTML = '';
 
     if (cart.items.length === 0) {
-        cartContainer.innerHTML = <h2>Seu carrinho está vazio.</h2>;
+        cartContainer.innerHTML = '<h2>Seu carrinho está vazio.</h2>';
         return;
     }
 
     cart.items.forEach(item => {
-        const product = item.productId;
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
+        const product = item.productId; // O produto populado
+        const cartItem = document.createElement('article');
+        cartItem.classList.add('d-flex', 'py-1', 'border', 'rounded', 'cart-item');
+        cartItem.style.maxHeight = '120px';
 
         cartItem.innerHTML = `
-        <article style="max-height: 120px;" class="d-flex py-1 border rounded cart-item">
-          <img class="image-cart" src="/assets/shape-maple-cbgang.jpg" alt="shape">
+          <img class="image-cart" src="${product.imageURL}" alt="${product.name}">
           <div class="d-flex justify-content-between w-100 p-1">
             <div class="d-flex descricao-itens-cart flex-column">
-              <h5 class="product-cart-name fw-semibold">Shape CB Gang</h5>
-                <p class="descricao-item-cart fs-6 fw-light"></p>
+              <h5 class="product-cart-name fw-semibold">${product.name}</h5>
+                <p class="descricao-item-cart fs-6 fw-light">${product.description}</p>
             </div>
             <div id="valor-item" class="d-flex flex-column align-items-center justify-content-end">
-              <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">200,00 R$</span>
-              <span id="product-cart-price" class="product-cart-price">200,00 R$</span>
+              <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">
+                ${product.promocao > 0 ? product.promocao.toFixed(2) + ' R$' : ''}</span>
+              <span id="product-cart-price" class="product-cart-price">${product.price.toFixed(2)} R$</span>
+              <button type="button" data-id="${product._id}" class="btn btn-danger btn-sm mt-auto remove-btn"><i class="bi bi-trash btn-lg me-1"></i>Excluir</button>
             </div>
           </div>
-        </article>
-        `
+        `;
 
         cartContainer.appendChild(cartItem);
     });
+
     const removeButtons = document.querySelectorAll('.remove-btn');
     removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const productId = this.getAttribute('data-id');
             removeFromCart(productId);
         });
@@ -112,15 +115,26 @@ async function updateCartDisplay() {
             credentials: 'include',
         });
 
-        if(response.ok) {
+        if (response.ok) {
             const cart = await response.json();
-            displayCartItems(cary);
+            displayCartItems(cart);
         } else {
-            console.error('Erro ao atualizar o  carrinho:', response.statusText);
+            console.error('Erro ao atualizar o carrinho:', response.statusText);
             alert('Erro ao atualizar o carrinho.');
         }
-    } catch(error) {
-        console.error('Error ao buscar itens do carrinho:', error);
+    } catch (error) {
+        console.error('Erro ao buscar itens do carrinho:', error);
         alert('Erro ao buscar itens do carrinho.');
     }
 }
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', async function (e) {
+        e.preventDefault();
+        const productId = this.getAttribute('data-id');
+        const quantity = 1;
+
+        await addToCart(productId, quantity);
+    });
+});
