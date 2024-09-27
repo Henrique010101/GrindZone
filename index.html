@@ -120,7 +120,7 @@
       </div>
     </section>
 
-    <section class="text-center backPadrao" id="promocao">
+    <section class="text-center backPadrao">
       <h2 class="m-0 py-3 py-xl-5">Busque por categoria:</h2>
 
       <article class="container row mx-auto g-4">
@@ -194,8 +194,8 @@
     </section>
 
 
-    <h2 class="text-center py-3 py-xl-5 backPadrao">Produtos na promoção!</h2>
-
+    <h2 class="text-center py-3 py-xl-5 backPadrao" id="promocao">Produtos na promoção!</h2>
+<a href="" class="add-to-cart"></a>
     <section class="container row mx-auto g-4" id="produtos-promocao">
     </section>
 
@@ -293,35 +293,7 @@
                 <th class="font-cart-th">Ação</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="my-auto">
-                <td>
-                  <div class="product d-flex align-items-center">
-                    <img src="https://picsum.photos/100/120" alt="Nome do produto" class="img-fluid rounded">
-                    <div class="info ms-3 d-none d-lg-block">
-                      <div class="name h5">Nome do produto</div>
-                      <div class="category text-muted">Categoria</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="font-cart-td"><strong>R$</strong> 120</td>
-                <td class="font-cart-td">
-                  <div class="qty d-flex flex-lg-row align-items-center bg-light rounded d-inline-flex rounded-lg-pill">
-                    <button class="btn p-0 px-2" aria-label="Remover um item"><i class="bi bi-dash"></i></button>
-                    <span class="my-2 my-lg-0 mx-2">2</span>
-                    <button class="btn p-0 px-2" aria-label="Adicionar um item"><i class="bi bi-plus"></i></button>
-                  </div>
-                </td>
-                <td class="font-cart-td"><strong>R$</strong> 240</td>
-                <td class="font-cart-td">
-                  <button class="btn btn-danger rounded-circle" aria-label="Remover item do carrinho"><i
-                      class="bi bi-x"></i></button>
-                </td>
-                <div class="info ms-1 d-lg-none border-top pt-2">
-                  <div class="name h5">Nome do produto</div>
-                  <div class="category text-muted">Categoria</div>
-                </div>
-              </tr>
+            <tbody id="conteudo-cart">
             </tbody>
           </table>
         </section>

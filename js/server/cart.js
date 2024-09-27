@@ -1,140 +1,114 @@
+let addToCartButtons = document.querySelectorAll('.add-to-cart');
+console.log(addToCartButtons)
+
+setTimeout(function() {
+    addToCartButtons = document.querySelectorAll('.add-to-cart')
+    console.log(addToCartButtons)
+
+    // Adiciona o listener de clique a cada botão
+    if (addToCartButtons.length > 0) {
+        addToCartButtons.forEach(a => {
+            a.addEventListener('click', function (event) {
+                event.preventDefault(); // Evita o comportamento padrão do <a>
+
+                // Extrai o ID do produto do atributo data-produto-id
+                const productId = this.getAttribute('data-produto-id');
+                console.log('ID do produto extraído:', productId);
+
+                // Verifica se o productId foi extraído corretamente
+                if (!productId) {
+                    console.error('Erro: productId não encontrado');
+                    return;
+                }
+
+                // Define a quantidade, por exemplo, 1 para adicionar um item
+                const quantity = 1;
+
+                // Chama a função addToCart com o ID do produto e a quantidade
+                console.log('Chamando addToCart com productId:', productId, 'e quantity:', quantity);
+                addToCart(productId, quantity);
+            });
+        });
+    } else {
+        console.error('Nenhum botão de adicionar ao carrinho encontrado');
+    }
+}, 1500);
+
 async function addToCart(productId, quantity) {
     try {
+        console.log('Iniciando requisição para /cart');
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                credentials: 'include', // Garante que o cookie seja enviado
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ productId, quantity }), // Adicionando a quantidade
-            credentials: 'include',
+            body: JSON.stringify({ productId, quantity })
         });
 
-        const data = await response.json();
-
-        if (response.ok) {
-            alert(data.message);
-            // Atualiza a exibição do carrinho após adicionar o item
-            await updateCartDisplay();
-        } else {
-            alert(data.message || 'Erro ao adicionar item ao carrinho.');
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log('Resposta do servidor:', data);
+
+        // Tratar a resposta e atualizar o front-end
+        console.log(data.message); // Exibe a mensagem "Item adicionado ao carrinho."
+        updateCartDisplay(data.cart); // Atualiza a exibição do carrinho com os produtos
+
     } catch (error) {
         console.error('Erro ao adicionar item ao carrinho:', error);
-        alert('Erro ao adicionar item ao carrinho.');
     }
 }
 
-async function removeFromCart(productId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/cart/${productId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            alert(data.message);
-            await updateCartDisplay();
-        } else {
-            alert(data.message || 'Erro ao remover item do carrinho.');
-        }
-    } catch (error) {
-        console.error('Erro ao remover item do carrinho:', error);
-        alert('Erro ao remover item do carrinho.');
-    }
-}
-
-async function fetchCart() {
-    try {
-        const response = await fetch('http://localhost:3000/api/cart', {
-            method: 'GET',
-            credentials: 'include',
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            displayCartItems(data);
-        } else {
-            alert(data.message || 'Erro ao obter itens do carrinho.');
-        }
-    } catch (error) {
-        console.error('Erro ao obter itens do carrinho:', error);
-        alert('Erro ao obter itens do carrinho.');
-    }
-}
-
-function displayCartItems(cart) {
-    const cartContainer = document.querySelector('.cart-items'); // Seletor atualizado
-    cartContainer.innerHTML = '';
-
-    if (cart.items.length === 0) {
-        cartContainer.innerHTML = '<h2>Seu carrinho está vazio.</h2>';
-        return;
-    }
+function updateCartDisplay(cart) {
+    const cartContainer = document.getElementById('conteudo-cart'); // Seleciona o tbody
+    cartContainer.innerHTML = ''; // Limpa o conteúdo atual do carrinho
 
     cart.items.forEach(item => {
-        const product = item.productId; // O produto populado
-        const cartItem = document.createElement('article');
-        cartItem.classList.add('d-flex', 'py-1', 'border', 'rounded', 'cart-item');
-        cartItem.style.maxHeight = '120px';
+        const product = item.productId; // Produto populado com a imagem, nome e outros dados
 
-        cartItem.innerHTML = `
-          <img class="image-cart" src="${product.imageURL}" alt="${product.name}">
-          <div class="d-flex justify-content-between w-100 p-1">
-            <div class="d-flex descricao-itens-cart flex-column">
-              <h5 class="product-cart-name fw-semibold">${product.name}</h5>
-                <p class="descricao-item-cart fs-6 fw-light">${product.description}</p>
+        // Criar o elemento <tr> para cada produto no carrinho
+        const cartRow = document.createElement('tr');
+        cartRow.classList.add('my-auto');
+
+        // HTML dinâmico para o produto no carrinho
+        cartRow.innerHTML = `
+            <td>
+                <div class="product d-flex align-items-center">
+                    <img src="http://seu-site.com/${product.img}" alt="${product.name}" class="img-fluid rounded">
+                    <div class="info ms-3 d-none d-lg-block">
+                        <div class="name h5">${product.name}</div>
+                        <div class="category text-muted">Categoria: ${product.category || 'N/A'}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="font-cart-td"><strong>R$</strong> ${product.price.toFixed(2)}</td>
+            <td class="font-cart-td">
+                <div class="qty d-flex flex-lg-row align-items-center bg-light rounded d-inline-flex rounded-lg-pill">
+                    <button class="btn p-0 px-2" aria-label="Remover um item" onclick="updateQuantity('${product._id}', -1)">
+                        <i class="bi bi-dash"></i>
+                    </button>
+                    <span class="my-2 my-lg-0 mx-2">${item.quantity}</span>
+                    <button class="btn p-0 px-2" aria-label="Adicionar um item" onclick="updateQuantity('${product._id}', 1)">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </div>
+            </td>
+            <td class="font-cart-td"><strong>R$</strong> ${(product.price * item.quantity).toFixed(2)}</td>
+            <td class="font-cart-td">
+                <button class="btn btn-danger rounded-circle" aria-label="Remover item do carrinho" onclick="removeItemFromCart('${product._id}')">
+                    <i class="bi bi-x"></i>
+                </button>
+            </td>
+            <div class="info ms-1 d-lg-none border-top pt-2">
+                <div class="name h5">${product.name}</div>
+                <div class="category text-muted">Categoria: ${product.category || 'N/A'}</div>
             </div>
-            <div id="valor-item" class="d-flex flex-column align-items-center justify-content-end">
-              <span id="product-cart-price-promo" class="product-cart-price-promo fw-light text-decoration-line-through text-black-50">
-                ${product.promocao > 0 ? product.promocao.toFixed(2) + ' R$' : ''}</span>
-              <span id="product-cart-price" class="product-cart-price">${product.price.toFixed(2)} R$</span>
-              <button type="button" data-id="${product._id}" class="btn btn-danger btn-sm mt-auto remove-btn"><i class="bi bi-trash btn-lg me-1"></i>Excluir</button>
-            </div>
-          </div>
         `;
 
-        cartContainer.appendChild(cartItem);
-    });
-
-    const removeButtons = document.querySelectorAll('.remove-btn');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const productId = this.getAttribute('data-id');
-            removeFromCart(productId);
-        });
+        // Adicionar a linha ao tbody
+        cartContainer.appendChild(cartRow);
     });
 }
-
-async function updateCartDisplay() {
-    try {
-        const response = await fetch('http://localhost:3000/api/cart', {
-            method: 'GET',
-            credentials: 'include',
-        });
-
-        if (response.ok) {
-            const cart = await response.json();
-            displayCartItems(cart);
-        } else {
-            console.error('Erro ao atualizar o carrinho:', response.statusText);
-            alert('Erro ao atualizar o carrinho.');
-        }
-    } catch (error) {
-        console.error('Erro ao buscar itens do carrinho:', error);
-        alert('Erro ao buscar itens do carrinho.');
-    }
-}
-
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', async function (e) {
-        e.preventDefault();
-        const productId = this.getAttribute('data-id');
-        const quantity = 1;
-
-        await addToCart(productId, quantity);
-    });
-});

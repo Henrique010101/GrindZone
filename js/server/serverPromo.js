@@ -21,7 +21,7 @@ window.onload = function () {
             <div class="card-body card-header w-100 pt-3">
                 <h5 class="text-center card-text fw-bold">${produto.name}</h5>
                 <p class="pt-2">${produto.description.replace(/,/g, '<br>')}</p>
-                <div class="mt-auto d-flex justify-content-between align-items-center w-100">
+                <div id="pai-btn-cart" class="mt-auto d-flex justify-content-between align-items-center w-100">
                     <div>
                         <span class="text-decoration-line-through text-black-50">
                             <strong>R$</strong>${produto.price.toFixed(2)}
@@ -29,9 +29,9 @@ window.onload = function () {
                         <br />
                         <span class="fs-5"><strong>R$</strong>${valorTotal.toFixed(2)}</span>
                     </div>
-                    <a href="#" type="button" class="btn btn-roxo btn-lg add-to-cart" data-produto-id="${produto._id}">
+                    <btn href="#" type="button" class="btn btn-roxo btn-lg add-to-cart" data-produto-id="${produto._id}">
                         + <i class="bi bi-cart2"></i>
-                    </a>
+                    </btn>
                 </div>
             </div>
         </div>
