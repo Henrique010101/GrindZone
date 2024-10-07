@@ -80,25 +80,3 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnTenis) btnTenis.addEventListener('click', () => redirecionarParaProdutos(categorias['6']));
 });
 
-document.getElementById('nav_cart').addEventListener('click', () => {
-    carregaCart();
-});
-
-function carregaCart () {
-    const cartItens = document.querySelector('.cart-items')
-    const offcanvasBody = document.querySelector('.offcanvas-body');
-    const articles = offcanvasBody.querySelectorAll('article');
-    const semProduto = document.querySelector('.semProduto');
-    const detalhesDaCompra = document.querySelector('.detalhesDaCompra');
-
-    if (articles) {
-        cartItens.classList.add('d-flex');
-        semProduto.classList.add('d-none');
-        detalhesDaCompra.classList.add('d-flex');
-    } else {
-        cartItens.classList.add('d-none');
-        semProduto.classList.add('d-flex');
-        detalhesDaCompra.classList.add('d-none');
-    }
-};
-

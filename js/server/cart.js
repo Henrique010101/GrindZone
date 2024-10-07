@@ -40,34 +40,38 @@ async function addToCart(productId, quantity) {
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'POST',
             headers: {
-                credentials: 'include', // Garante que o cookie seja enviado
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ productId, quantity })
+            credentials: 'include', // Garante que o cookie seja enviado
+            body: JSON.stringify({ 
+                productId: productId,
+                quantity: quantity
+            })
         });
 
-        if (!response.ok) {
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Item adicionado ao carrinho:', data);
+            // Tratar a resposta e atualizar o front-end
+            console.log(data.message); // Exibe a mensagem "Item adicionado ao carrinho."
+            updateCartDisplay(data.cart); // Atualiza a exibição do carrinho com os produtos
+        } else {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
-
-        const data = await response.json();
-        console.log('Resposta do servidor:', data);
-
-        // Tratar a resposta e atualizar o front-end
-        console.log(data.message); // Exibe a mensagem "Item adicionado ao carrinho."
-        updateCartDisplay(data.cart); // Atualiza a exibição do carrinho com os produtos
 
     } catch (error) {
         console.error('Erro ao adicionar item ao carrinho:', error);
     }
 }
 
+const cartContainer = document.getElementById('conteudo-cart'); // Seleciona o tbody
+
 function updateCartDisplay(cart) {
-    const cartContainer = document.getElementById('conteudo-cart'); // Seleciona o tbody
     cartContainer.innerHTML = ''; // Limpa o conteúdo atual do carrinho
 
     cart.items.forEach(item => {
         const product = item.productId; // Produto populado com a imagem, nome e outros dados
+        const modalId = `modal-${product._id}`;
 
         // Criar o elemento <tr> para cada produto no carrinho
         const cartRow = document.createElement('tr');
@@ -76,9 +80,9 @@ function updateCartDisplay(cart) {
         // HTML dinâmico para o produto no carrinho
         cartRow.innerHTML = `
             <td>
-                <div class="product d-flex align-items-center">
-                    <img src="http://seu-site.com/${product.img}" alt="${product.name}" class="img-fluid rounded">
-                    <div class="info ms-3 d-none d-lg-block">
+                <div class="d-flex align-items-center">
+                    <img src="http://localhost:3000/${product.img}" style="width: 90px" data-bs-toggle="modal" data-bs-target="#${modalId}" alt="${product.name}" class="img-fluid rounded">
+                    <div class="ms-3 d-none d-lg-block">
                         <div class="name h5">${product.name}</div>
                         <div class="category text-muted">Categoria: ${product.category || 'N/A'}</div>
                     </div>
@@ -102,13 +106,17 @@ function updateCartDisplay(cart) {
                     <i class="bi bi-x"></i>
                 </button>
             </td>
-            <div class="info ms-1 d-lg-none border-top pt-2">
-                <div class="name h5">${product.name}</div>
-                <div class="category text-muted">Categoria: ${product.category || 'N/A'}</div>
-            </div>
         `;
-
         // Adicionar a linha ao tbody
         cartContainer.appendChild(cartRow);
     });
 }
+
+const nav_cart = document.getElementById('nav_cart');
+nav_cart.addEventListener('click', () => {
+    if(!cartContainer.hasChildNodes()) {
+        cartContainer.innerHTML =`
+        <h1 class="d-flex align-items-center justify-content-center">Carrinho vazio.</h1>
+        `
+    }
+})

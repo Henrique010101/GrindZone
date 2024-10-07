@@ -239,6 +239,12 @@
    }
  }
 
+ @media (max-width: 400px) {
+  .banner-home {
+    height: 40vh;
+  }
+ }
+
  [data-bs-theme="dark"] {
    color: white;
  }
