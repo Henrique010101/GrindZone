@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 
 @font-face {
   font-family: 'FontGratitada';
@@ -22,6 +24,7 @@ body {
   --cor2-dark: #1C1C1C;
   --roxo-: #50518C;
   --font-estilosa: "Grandstander", cursive;
+  --font-titulos: "Bebas Neue", sans-serif;
   --font-padrao: "Owswald", sans-serif;
 }
 
@@ -41,6 +44,10 @@ body {
 
 .font-estilosa {
   font-family: var(--font-estilosa);
+}
+
+.font-titulo {
+  font-family: var(--font-titulos);
 }
 
 .carrouselSlide {
@@ -126,6 +133,38 @@ body {
 .btn-desativado {
   opacity: 0.6;
   pointer-events: none;
+}
+
+.custom-alert {
+  position: fixed;
+  top: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  z-index: 9999;
+  opacity: 2;
+}
+
+.alert-success {
+  background-color: rgba(0, 128, 0, 0.8);
+}
+
+.alert-fail {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 13px;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
 }
 
 input[type=checkbox] {
@@ -266,6 +305,9 @@ input[type="checkbox"]:focus {
 
   .font-cart-td {
     font-size: 0.79rem;
+  }
+  .custom-alert {
+    width: 90%;
   }
 }
 

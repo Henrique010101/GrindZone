@@ -14,9 +14,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./style.css">
   <script defer src="js/scripts.js"></script>
+  <script type="module" defer src="js/alerts.js"></script>
   <script defer src="js/server/serverProducts.js"></script>
-  <script defer src="js/server/User.js"></script>
-  <script defer src="js/server/cart.js"></script>
+  <script type="module" defer src="js/server/User.js"></script>
+  <script type="module" defer src="js/server/cart.js"></script>
 </head>
 
 <body class="d-flex flex-column flex-wrap-sm min-vh-100" data-bs-theme="light">
@@ -46,14 +47,20 @@
                 <a class="nav-link nav-link-produtos" href="index.html">Home</a>
               </li>
               <li id="user-section" class="dropdown">
-                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button" data-bs-toggle="dropdown">
+                <button id="user-info" class="dropdown-toggle btn btn-roxo fw-medium" type="button"
+                  data-bs-toggle="dropdown">
                   Perfil
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" data-bs-toggle="modal" data-bs-target="#modal-perfil">Entrar</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#" data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;" data-bs-target="#logout-button">Sair</a></li>
-                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_entrar" href="#" data-bs-toggle="modal"
+                      data-bs-target="#modal-perfil">Entrar</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_registrar" href="#"
+                      data-bs-toggle="modal" data-bs-target="#modal-registro">Registre-se</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_sair" href="#" style="display: none;"
+                      data-bs-target="#logout-button">Sair</a></li>
+                  <li><a type="button" class="dropdown-item fw-medium" id="nav_cart" href="#" style="display: none;"
+                      data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight">Carrinho<i class="bi bi-cart2 ms-2"></i></a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -249,33 +256,41 @@
   <!-- OffCanvas-Cart -->
    
   <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <header class="offcanvas-header bg-cor">
-      <h2 class="offcanvas-title" id="offcanvasRightLabel">Seu carrinho</h2>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <header class="bg-cor text-center py-3 d-flex offcanvas-header" style="height: 80px;">
+      <h2 class="fs-5 m-0 ps-md-3 d-flex flex-wrap align-items-center font-estilosa">
+        Compras de 
+        <span id="nome_cart" class="font-estilosa fw-bold ms-2"> </span>
+      </h2>
+      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="offcanvas"
+        aria-label="Fechar"></button>
     </header>
-    <section class="offcanvas-body d-flex align-items-center">
-
-      <h1 class="semProduto align-items-center justify-content-between">Não há nenhum produto no carrinho</h1>
-
-      <div class="d-flex flex-column col-12 col-md-6 cart-items">
-        <h3 class="top-0">Todos os itens:</h3>
+    <main id="main_cart" class="container-lg py-4 p-lg-4">
+      <div class="row">
+        <section class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="font-cart-th">Produto</th>
+                <th class="font-cart-th">Preço</th>
+                <th class="font-cart-th">Quantidade</th>
+                <th class="font-cart-th">Total</th>
+                <th class="font-cart-th">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="conteudo-cart">
+            </tbody>
+          </table>
+        </section>
+        <aside class="col-md-3" id="resumo-compra-container"></aside>
       </div>
-      <article></article>
-      <section
-        class="bg-cor rounded border shadow d-flex flex-column align-items-center col-12 col-md-6 mt-3 mt-md-0 pt-2 detalhesDaCompra">
-        <h3 class="valor-cart-sem-desconto">Valor sem desconto: <strong>1000,00 R$</strong></h3>
-        <h3 class="valor-cart-com-desconto">Valor do desconto: <strong>- 199,00 R$</strong></h3>
-        <h3 id="ValorDaTotalTitulo" class="valor-cart-total m-0 pt-3 border-top border-secondary">Valor total:
-          <strong>801,00 R$</strong> À vista</h3>
-        <h3 class="m-0 valor-cart-total">ou</h3>
-        <h3 class="m-0 valor-cart-total border-bottom pb-2 border-secondary">10x de <strong>80,10 R$</strong></h3>
-        <button type="button" class="valor-cart-parcelado btn btn-lg btn-roxo mt-2 justify-content-end">Finalizar
-          Compra</button>
-      </section>
-    </section>
+    </main>
   </aside>
-
   </main>
+
+  <div id="alertBox" style="display: none;" class="custom-alert">
+    <span id="alertMessage"></span>
+    <span class="close-btn" onclick="hideAlert()">&times;</span>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

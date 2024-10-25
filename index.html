@@ -14,9 +14,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./style.css">
   <script defer src="js/scripts.js"></script>
+  <script type="module" defer src="js/alerts.js"></script>
   <script defer src="js/server/serverPromo.js"></script>
-  <script defer src="js/server/User.js"></script>
-  <script defer src="js/server/cart.js"></script>
+  <script type="module" defer src="js/server/User.js"></script>
+  <script type="module" defer src="js/server/cart.js"></script>
 </head>
 
 <body data-bs-theme="light">
@@ -124,7 +125,7 @@
     </section>
 
     <section class="text-center backPadrao">
-      <h2 class="m-0 py-3 py-xl-5 font-estilosa">Busque por categoria:</h2>
+      <h2 class="m-0 py-3 py-xl-5 font-titulo">Busque por categoria:</h2>
 
       <article class="container row mx-auto g-4">
         <div class="col-6 col-md-4 col-xxl-2" id="Moletom" role="button" tabindex="0">
@@ -134,7 +135,7 @@
               <figcaption class="visually-hidden">Moletom Grizzly</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Moletom</h5>
+              <h5 class="text-center card-text font-titulo">Moletom</h5>
             </div>
           </div>
         </div>
@@ -145,7 +146,7 @@
               <figcaption class="visually-hidden">Shape Maple CBGang</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Shape</h5>
+              <h5 class="text-center card-text font-titulo">Shape</h5>
             </div>
           </div>
         </div>
@@ -156,7 +157,7 @@
               <figcaption class="visually-hidden">Truck Independent 149mm</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Truck</h5>
+              <h5 class="text-center card-text font-titulo">Truck</h5>
             </div>
           </div>
         </div>
@@ -167,7 +168,7 @@
               <figcaption class="visually-hidden">Rolamento Independent</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Rolamento</h5>
+              <h5 class="text-center card-text font-titulo">Rolamento</h5>
             </div>
           </div>
         </div>
@@ -178,7 +179,7 @@
               <figcaption class="visually-hidden">Rodinha Lyons 54mm</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Roda</h5>
+              <h5 class="text-center card-text font-titulo">Roda</h5>
             </div>
           </div>
         </div>
@@ -189,7 +190,7 @@
               <figcaption class="visually-hidden">Tênis Globe Tilt</figcaption>
             </figure>
             <div class="card-body card-header btn-roxo w-100">
-              <h5 class="text-center card-text fw-bold font-estilosa">Tênis</h5>
+              <h5 class="text-center card-text font-titulo">Tênis</h5>
             </div>
           </div>
         </div>
@@ -197,13 +198,13 @@
     </section>
 
 
-    <h2 class="text-center py-3 py-xl-5 backPadrao font-estilosa" id="promocao">Produtos na promoção!</h2>
+    <h2 class="text-center py-3 py-xl-5 backPadrao font-titulo" id="promocao">Produtos na promoção!</h2>
     <a href="" class="add-to-cart"></a>
     <section class="container row mx-auto g-4" id="produtos-promocao">
     </section>
 
     <article class="d-flex justify-content-center py-5">
-      <a href="produtos.html" class="btn btn-roxo ver-todos-produtos shadow border fw-bold fs-4 p-2 px-4 rounded-3 mx-2 font-estilosa font-estilosa"
+      <a href="produtos.html" class="btn btn-roxo ver-todos-produtos shadow border fs-4 p-2 px-4 rounded-3 mx-2 font-titulo"
         role="button" target="_blank" aria-label="Ver todos os nossos produtos">
         Ver todos os nossos Produtos
         <i class="bi bi-arrow-right-square ps-2"></i>
@@ -211,7 +212,7 @@
     </article>
 
     <section class="py-5 my-5 bg-cor" aria-labelledby="facilities-heading">
-      <h2 id="facilities-heading" class="text-center py-3 pb-md-4 texto-sombra-basica font-estilosa">Conheça todas as nossas facilidades!</h2>
+      <h2 id="facilities-heading" class="text-center py-3 pb-md-4 texto-sombra-basica font-titulo">Conheça todas as nossas facilidades!</h2>
   
       <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-3 p-3">
           <article class="divs-facilidades d-flex" aria-labelledby="payment-method">
@@ -230,7 +231,7 @@
               </div>
               <div>
                   <h5 id="return-policy" class="ms-3 mb-1 letra-roxa fw-bold font-estilosa">DOIS MESES</h5>
-                  <p class="texto-menor ms-3">Fique livre para retornar em até 60 dias.</p>
+                  <p class="texto-menor ms-3">Dois meses de garantia em todos os produtos.</p>
               </div>
           </article>
   
@@ -250,7 +251,7 @@
       <article class="row">
         <div class="col-10 col-xl-8 mx-auto">
           <div class="border border-2 rounded p-3 nav-cont">
-            <h3 class="fw-bold p-3 font-estilosa">Entre em contato!</h3>
+            <h3 class="p-3 font-titulo">Entre em contato!</h3>
             <form id="contato" aria-labelledby="contactForm">
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingNome" placeholder="Nome" required>
@@ -315,7 +316,7 @@
   <aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <header class="bg-cor text-center py-3 d-flex offcanvas-header" style="height: 80px;">
       <h2 class="fs-5 m-0 ps-md-3 d-flex flex-wrap align-items-center font-estilosa">
-        Carrinho de compras do 
+        Compras de 
         <span id="nome_cart" class="font-estilosa fw-bold ms-2"> </span>
       </h2>
       <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="offcanvas"
@@ -460,6 +461,11 @@
         </footer>
       </div>
     </div>
+  </div>
+
+  <div id="alertBox" style="display: none;" class="custom-alert">
+    <span id="alertMessage"></span>
+    <span class="close-btn" onclick="hideAlert()">&times;</span>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

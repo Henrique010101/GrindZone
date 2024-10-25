@@ -1,3 +1,5 @@
+import { showAlert, hideAlert } from '../alerts.js';
+
 document.getElementById('register-form').addEventListener('submit', registerUser);
 document.getElementById('login-form').addEventListener('submit', loginUser);
 
@@ -41,12 +43,12 @@ async function registerUser(event) {
         }
 
         const data = await response.json();
-        alert(data.msg)
         location.reload();
+        showAlert(data.msg, true);
 
     } catch (error) {
         console.error('Erro ao registrar:', error);
-        alert('Erro ao fazer o registro. Por favor, tente novamente.');
+        showAlert('Erro ao fazer o registro. Por favor, tente novamente.', false);
     }
 }
 
@@ -69,14 +71,17 @@ async function loginUser(event) {
             throw new Error(data.msg || 'Erro desconhecido durante o login.');
         }
             const data = await response.json();
-            alert(data.message);
             document.getElementById('login-email').value = ''; // Limpa os campos corretamente
             document.getElementById('login-password').value = '';
-            location.reload();
+            showAlert('Login realizado com sucesso!', true);
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+            
 
     } catch (error) {
         console.error('Erro ao fazer login:', error);
-        alert('Erro ao fazer login. Por favor, tente novamente.');
+        showAlert('Erro ao fazer login. Por favor, tente novamente.', false);
     }
 }
 
@@ -124,14 +129,14 @@ async function logout() {
             document.getElementById('nav_sair').style.display = 'none';
             document.getElementById('nav_cart').style.display = 'none';
 
-            alert('Você foi deslogado com sucesso!');
+            showAlert('Você foi deslogado com sucesso!', true);
         } else {
             // Trate erros aqui
             alert('Erro ao deslogar. Tente novamente.');
         }
     } catch (error) {
         console.error('Erro ao fazer logout:', error);
-        alert('Erro ao deslogar. Tente novamente.');
+        showAlert('Erro ao deslogar. Tente novamente.', false);
     }
 }
 

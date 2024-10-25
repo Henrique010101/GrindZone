@@ -63,6 +63,9 @@ async function renderizarProdutos() {
         produtosFiltrados.forEach(produto => {
             const modalId = `modal-${produto._id}`;
             const valorTotal = produto.price * (1 - produto.promocao / 100);
+            const precoOriginal = produto.price.toFixed(2).replace('.', ',');
+            const precoPromocional = valorTotal.toFixed(2).replace('.', ',');
+
             html += `
                 <div class="card-todos-produtos  btn text-start p-0">
                     <div class="card p-0 align-items-center h-100 d-flex flex-column">
@@ -75,17 +78,17 @@ async function renderizarProdutos() {
                         <div class="mt-auto d-flex justify-content-between align-items-center w-100">
                         <div>
                             <span class="preco-parcelado text-black-50">
-                            10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
+                            10x de ${(valorTotal / 10).toFixed(2).replace('.', ',').slice(0, 4)}
                             </span>
                             <span class="preco-total">
                             <br>
                             ${produto.promocao > 0 ? `
                                 <strong class="preco-promo fw-light text-decoration-line-through text-black-50">
-                                R$ ${produto.price.toFixed(2)}
+                                R$ ${precoOriginal}
                                 </strong>
                                 <br>` : ''
                                 }
-                            <strong>R$</strong> ${valorTotal.toFixed(2)}
+                            <strong>R$</strong> ${precoPromocional}
                             </span>
                         </div>
                         <a href="#" class="btn btn-roxo btn-custom add-to-cart" data-produto-id="${produto._id}" aria-label="Adicionar ${produto.name} ao carrinho">+ <i class="bi bi-cart2"></i></a>
@@ -131,17 +134,17 @@ async function renderizarProdutos() {
                         <div class="modal-footer">
                         <div class="me-auto">
                             <span class="preco-promo">
-                            10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
+                            10x de ${(valorTotal / 10).toFixed(2).replace('.', ',').slice(0, 4)}
                             </span>
                             <span>
                             <br>
                             ${produto.promocao > 0 ? `
                                 <strong class="text-decoration-line-through text-black-50">
-                                R$ ${produto.price.toFixed(2)}
+                                R$ ${precoOriginal}
                                 </strong>
                                 <br>` : ''
                                 }
-                            <strong>R$</strong> ${valorTotal.toFixed(2)}
+                            <strong>R$</strong> ${precoPromocional}
                             </span>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

@@ -1,10 +1,11 @@
+import { showAlert } from "../alerts.js";
 let addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cartContainer = document.getElementById('conteudo-cart'); // Seleciona o tbody
 const mainCart = document.getElementById('main_cart');
-const nomeUsuario =  document.getElementById('nome_usuario');
+const nomeUsuario = document.getElementById('nome_usuario');
 console.log(addToCartButtons)
 
-setTimeout(function() {
+setTimeout(function () {
     addToCartButtons = document.querySelectorAll('.add-to-cart')
     console.log(addToCartButtons)
 
@@ -46,7 +47,7 @@ async function addToCart(productId, quantity) {
                 'Content-Type': 'application/json'
             },
             credentials: 'include', // Garante que o cookie seja enviado
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 productId: productId,
                 quantity: quantity
             })
@@ -57,13 +58,14 @@ async function addToCart(productId, quantity) {
             console.log('Item adicionado ao carrinho:', data);
             // Tratar a resposta e atualizar o front-end
             console.log(data.message); // Exibe a mensagem "Item adicionado ao carrinho."
+            showAlert('Produto adicionado com sucesso!', true);
             updateCartDisplay(data.cart); // Atualiza a exibição do carrinho com os produtos
         } else {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
     } catch (error) {
-        console.error('Erro ao adicionar item ao carrinho:', error);
+        showAlert(error.message || 'Erro ao adicionar produto', false);
     }
 }
 
@@ -94,7 +96,7 @@ async function fetchCart() {
     }
 }
 
-async function removeItemFromCart(productId) {
+export async function removeItemFromCart(productId) {
     console.log("Removendo o produto com o ID:", productId);
     try {
         const response = await fetch(`http://localhost:3000/api/cart/${productId}`, {
@@ -105,13 +107,42 @@ async function removeItemFromCart(productId) {
         if (response.ok) {
             const data = await response.json();
             console.log('Dados retornados:', data); // Verifique aqui
+            showAlert('Produto excluído com sucesso!', true);
             updateCartDisplay(data.cart);
             renderizarResumoCompra(data.cart);
         } else {
             console.error('Erro ao remover item do carrinho:', response.statusText);
+            showAlert('Erro ao excluír produto!', false);
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
+    }
+}
+
+export async function updateQuantity(productId, change) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/cart/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity: change }), // Envia a mudança de quantidade
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const updatedCart = await response.json();
+            console.log("Carrinho atualizado com sucesso:", updatedCart);
+            showAlert('Quantidade alterada com sucesso!', true);
+            updateCartDisplay(updatedCart); // Atualiza a exibição do carrinho no front-end
+            renderizarResumoCompra(updatedCart);
+        } else {
+            const errorData = await response.json();
+            showAlert(`Erro ao alterar a quantidade: ${errorData.message}`, false); // Exibe a mensagem de erro
+        }
+    } catch (error) {
+        console.error('Erro no servidor ao alterar a quantidade:', error);
+        showAlert('Erro no servidor ao alterar a quantidade!', false);
     }
 }
 
@@ -142,8 +173,8 @@ function updateCartDisplay(cart) {
 
     if (isCartEmpty) {
         console.log("Carrinho vazio.");
+        emptyMessage.textContent = 'Seu carrinho está vazio.';
         if (!mainCart.contains(emptyMessage)) {
-            emptyMessage.textContent = 'Seu carrinho está vazio.';
             mainCart.appendChild(emptyMessage);
         }
         return;
@@ -153,13 +184,14 @@ function updateCartDisplay(cart) {
         }
     }
 
-    // Renderiza os produtos no carrinho
     cart.items.forEach(item => {
         const product = item.productId;
-        const cartRow = document.createElement('tr');
-        cartRow.classList.add('my-auto');
+        console.log("Produto recebido:", product); // Verifique se o objeto contém os detalhes do produto
 
         if (product && product.price) {
+            const cartRow = document.createElement('tr');
+            cartRow.classList.add('my-auto');
+
             cartRow.innerHTML = `
                 <td>
                     <div class="d-flex align-items-center">
@@ -173,35 +205,62 @@ function updateCartDisplay(cart) {
                 <td class="font-cart-td"><strong>R$</strong> ${product.price.toFixed(2)}</td>
                 <td class="font-cart-td">
                     <div class="qty d-flex flex-lg-row align-items-center bg-light rounded d-inline-flex rounded-lg-pill">
-                        <button class="btn p-0 px-2" onclick="updateQuantity('${product._id}', -1)">
+                        <button class="btn p-0 px-2 updateCartMinus" data-product-id="${product._id}">
                             <i class="bi bi-dash"></i>
                         </button>
                         <span class="my-2 my-lg-0 mx-2">${item.quantity}</span>
-                        <button class="btn p-0 px-2" onclick="updateQuantity('${product._id}', 1)">
+                        <button class="btn p-0 px-2 updateCartPlus" data-product-id="${product._id}">
                             <i class="bi bi-plus"></i>
                         </button>
                     </div>
                 </td>
                 <td class="font-cart-td"><strong>R$</strong> ${(product.price * item.quantity).toFixed(2)}</td>
                 <td class="font-cart-td">
-                    <button class="btn btn-danger rounded-circle" onclick="removeItemFromCart('${product._id}')">
+                    <button class="btn btn-danger rounded-circle remove_cart" data-product-id="${product._id}">
                         <i class="bi bi-x"></i>
                     </button>
                 </td>
             `;
+
+            cartContent.appendChild(cartRow);
         } else {
             console.error("Produto ou preço não encontrado:", product);
         }
+    });
 
-        cartContent.appendChild(cartRow);
+    // Selecionar os botões de remoção após adicionar todos os produtos
+    const removeBtns = document.querySelectorAll('.remove_cart');
+    const updateMinusBtns = document.querySelectorAll('.updateCartMinus');
+    const updatePlusBtns = document.querySelectorAll('.updateCartPlus');
+
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-product-id');
+            removeItemFromCart(productId,);
+        });
+    });
+
+    updateMinusBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-product-id');
+            console.log("Diminuindo a quantidade para o produto:", productId);
+            updateQuantity(productId, -1);
+        });
+    });
+    
+    updatePlusBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-product-id');
+            console.log("Aumentando a quantidade para o produto:", productId);
+            updateQuantity(productId, 1);
+        });
     });
 }
-
 
 function renderizarResumoCompra(carrinho) {
     console.log('Renderizando resumo com:', carrinho);
     const resumoContainer = document.getElementById('resumo-compra-container');
-    
+
     // Limpa o conteúdo anterior
     resumoContainer.innerHTML = '';
 
@@ -237,7 +296,7 @@ function renderizarResumoCompra(carrinho) {
 
 const navCart = document.getElementById('nav_cart');
 const removeCart = document.getElementById('button_remove_cart');
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     navCart.addEventListener('click', () => {
         mainCart
         fetchCart();

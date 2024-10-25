@@ -13,6 +13,9 @@ window.onload = function () {
             produtos.forEach(produto => {
                 const modalId = `modal-promocao-${produto._id}`;
                 const valorTotal = produto.price * (1 - produto.promocao / 100);
+                const precoOriginal = produto.price.toFixed(2).replace('.', ',');
+                const precoPromocional = valorTotal.toFixed(2).replace('.', ',');
+
                 HTML += `
                 <div class="col-12 col-md-6 col-xxl-4">
         <div class="card h-100 p-0 align-items-center">
@@ -24,10 +27,10 @@ window.onload = function () {
                 <div id="pai-btn-cart" class="mt-auto d-flex justify-content-between align-items-center w-100">
                     <div>
                         <span class="text-decoration-line-through text-black-50">
-                            <strong>R$</strong>${produto.price.toFixed(2)}
+                            <strong>R$</strong>${precoOriginal}
                         </span>
                         <br />
-                        <span class="fs-5"><strong>R$</strong>${valorTotal.toFixed(2)}</span>
+                        <span class="fs-5"><strong>R$</strong>${precoPromocional}</span>
                     </div>
                     <btn href="#" type="button" class="btn btn-roxo btn-lg add-to-cart" data-produto-id="${produto._id}">
                         + <i class="bi bi-cart2"></i>
@@ -80,15 +83,15 @@ window.onload = function () {
                 <div class="modal-footer">
                     <div class="me-auto">
                         <span class="preco-promo ">
-                            10x de ${(valorTotal / 10).toFixed(2).slice(0, 4)}
+                            10x de ${(valorTotal / 10).toFixed(2).replace('.', ',').slice(0, 4)}
                         </span>
                         <span>
                             <br>
                             ${produto.promocao > 0 ?
                         `<strong class="text-decoration-line-through text-black-50">
-                                R$ ${produto.price.toFixed(2)}
+                                R$ ${precoOriginal}
                             </strong><br>` : ''}
-                            <strong>R$</strong> ${valorTotal.toFixed(2)}
+                            <strong>R$</strong> ${precoPromocional}
                         </span>
                     </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
