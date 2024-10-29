@@ -4,7 +4,7 @@ let produtosFiltrados = [];
 
 async function carregarProdutos() {
     try {
-        const response = await fetch(`http://localhost:3000/api/products`);
+        const response = await fetch(`https://grindzone-of.netlify.app/api/products`);
         if (!response.ok) throw new Error('Erro na requisição');
         todosOsProdutos = await response.json();
         produtosFiltrados = [...todosOsProdutos];
@@ -69,7 +69,7 @@ async function renderizarProdutos() {
             html += `
                 <div class="card-todos-produtos  btn text-start p-0">
                     <div class="card p-0 align-items-center h-100 d-flex flex-column">
-                    <img class="card-img-produtos" data-bs-toggle="modal" data-bs-target="#${modalId}" alt="${produto.name}" src="http://localhost:3000/${produto.img}">
+                    <img class="card-img-produtos" data-bs-toggle="modal" data-bs-target="#${modalId}" alt="${produto.name}" src="https://grindzone-of.netlify.app/${produto.img}">
                     <div class="card-body card-header ps-2 pt-2 px-1 w-100 d-flex flex-column">
                         <h5 class="fs-6 titulo-produto text-center fw-bold">${produto.name}</h5>
                         <ul class="ul-produtos">
@@ -108,13 +108,13 @@ async function renderizarProdutos() {
                         <div id="carousel-${modalId}" class="carousel slide carousel-dark" data-bs-ride="carousel">
                             <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 1">
+                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 2">
+                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="http://localhost:3000/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 3">
+                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto" alt="${produto.name} - Imagem 3">
                             </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${modalId}" data-bs-slide="prev">
