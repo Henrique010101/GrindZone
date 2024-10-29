@@ -41,7 +41,7 @@ setTimeout(function () {
 async function addToCart(productId, quantity) {
     try {
         console.log('Iniciando requisição para /cart');
-        const response = await fetch('https://grindzone-of.netlify.app/api/cart', {
+        const response = await fetch('https://grind-zone-api.vercel.app/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ async function addToCart(productId, quantity) {
 
 async function fetchCart() {
     try {
-        const response = await fetch('https://grindzone-of.netlify.app/api/cart', {
+        const response = await fetch('https://grind-zone-api.vercel.app/api/cart', {
             method: 'GET',
             credentials: 'include', // Inclui os cookies
         });
@@ -99,7 +99,7 @@ async function fetchCart() {
 export async function removeItemFromCart(productId) {
     console.log("Removendo o produto com o ID:", productId);
     try {
-        const response = await fetch(`https://grindzone-of.netlify.app/api/cart/${productId}`, {
+        const response = await fetch(`https://grind-zone-api.vercel.app/api/cart/${productId}`, {
             method: 'DELETE',
             credentials: 'include', // Inclui os cookies
         });
@@ -121,7 +121,7 @@ export async function removeItemFromCart(productId) {
 
 export async function updateQuantity(productId, change) {
     try {
-        const response = await fetch(`https://grindzone-of.netlify.app/api/cart/${productId}`, {
+        const response = await fetch(`https://grind-zone-api.vercel.app/api/cart/${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ function updateCartDisplay(cart) {
             cartRow.innerHTML = `
                 <td>
                     <div class="d-flex align-items-center">
-                        <img src="https://grindzone-of.netlify.app/${product.img}" style="width: 90px" alt="${product.name}" class="img-fluid rounded">
+                        <img src="https://grind-zone-api.vercel.app/${product.img}" style="width: 90px" alt="${product.name}" class="img-fluid rounded">
                         <div class="ms-3 d-none d-lg-block">
                             <div class="name h5">${product.name}</div>
                             <div class="category text-muted">Categoria: ${product.category || 'N/A'}</div>

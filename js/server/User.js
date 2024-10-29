@@ -19,7 +19,7 @@ async function registerUser(event) {
 
     try {
         // Realize a requisição POST ao servidor
-        const response = await fetch(`https://grindzone-of.netlify.app/api/register`, {
+        const response = await fetch(`https://grind-zone-api.vercel.app/api/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ async function loginUser(event) {
     const password = document.getElementById('login-password').value;
 
     try {
-        const response = await fetch('https://grindzone-of.netlify.app/api/login', {
+        const response = await fetch('https://grind-zone-api.vercel.app/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json"
@@ -88,7 +88,7 @@ async function loginUser(event) {
 async function verifySession() {
 
     try {
-        const response = await fetch('https://grindzone-of.netlify.app/api/check-session', {
+        const response = await fetch('https://grind-zone-api.vercel.app/api/check-session', {
             method: 'GET',
             credentials: 'include'
         });
@@ -117,7 +117,7 @@ async function verifySession() {
 
 async function logout() {
     try {
-        const response = await fetch('https://grindzone-of.netlify.app/api/logout', {
+        const response = await fetch('https://grind-zone-api.vercel.app/api/logout', {
             method: 'GET',
             credentials: 'include' // Inclui cookies na solicitação
         });

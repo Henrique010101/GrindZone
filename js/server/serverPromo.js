@@ -4,7 +4,7 @@ window.onload = function () {
 
     async function renderizarProdutosNaPromocao() {
         try {
-            const response = await fetch(`https://grindzone-of.netlify.app/api/products/promocao`)
+            const response = await fetch(`https://grind-zone-api.vercel.app/api/products/promocao`)
             if (!response.ok) throw new Error('Erro na requisição');
             const produtos = await response.json();
 
@@ -20,7 +20,7 @@ window.onload = function () {
                 <div class="col-12 col-md-6 col-xxl-4">
         <div class="card h-100 p-0 align-items-center">
             <img class="card-img-promo btn" data-bs-toggle="modal" data-bs-target="#${modalId}"
-                 alt="${produto.name}" src="https://grindzone-of.netlify.app/${produto.img}">
+                 alt="${produto.name}" src="https://grind-zone-api.vercel.app/${produto.img}">
             <div class="card-body card-header w-100 pt-3">
                 <h5 class="text-center card-text fw-bold">${produto.name}</h5>
                 <p class="pt-2">${produto.description.replace(/,/g, '<br>')}</p>
@@ -52,15 +52,15 @@ window.onload = function () {
                     <div id="carousel-${modalId}" class="carousel slide carousel-dark" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto"
+                                <img src="https://grind-zone-api.vercel.app/${produto.img}" class="d-block w-75 mx-auto"
                                      alt="${produto.name} - Imagem 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto"
+                                <img src="https://grind-zone-api.vercel.app/${produto.img}" class="d-block w-75 mx-auto"
                                      alt="${produto.name} - Imagem 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://grindzone-of.netlify.app/${produto.img}" class="d-block w-75 mx-auto"
+                                <img src="https://grind-zone-api.vercel.app/${produto.img}" class="d-block w-75 mx-auto"
                                      alt="${produto.name} - Imagem 3">
                             </div>
                         </div>
