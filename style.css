@@ -40,6 +40,10 @@ body {
   font-family: var(--font-titulos);
 }
 
+.font-padrao {
+  font-family: var(--font-padrao);
+}
+
 .carrouselSlide {
   border: 2px solid var(--roxo-) !important;
 }

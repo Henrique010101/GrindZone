@@ -1,52 +1,49 @@
 import { showAlert } from "../alerts.js";
+import { verifySession } from "./User.js";
 let addToCartButtons = document.querySelectorAll('.add-to-cart');
-const cartContainer = document.getElementById('conteudo-cart'); // Seleciona o tbody
+const cartContainer = document.getElementById('conteudo-cart');
 const mainCart = document.getElementById('main_cart');
 const nomeUsuario = document.getElementById('nome_usuario');
 console.log(addToCartButtons)
 
-setTimeout(function () {
-    addToCartButtons = document.querySelectorAll('.add-to-cart')
-    console.log(addToCartButtons)
 
-    // Adiciona o listener de clique a cada botão
+const addCartButtonInterval = setInterval(() => {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
     if (addToCartButtons.length > 0) {
-        addToCartButtons.forEach(a => {
-            a.addEventListener('click', function (event) {
-                event.preventDefault(); // Evita o comportamento padrão do <a>
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', async function (event) {
+                event.preventDefault();
 
-                // Extrai o ID do produto do atributo data-produto-id
+                const isAuthenticated = await verifySession();
+                if (!isAuthenticated) {
+                    openLoginModal();
+                    return;
+                }
+
                 const productId = this.getAttribute('data-produto-id');
-                console.log('ID do produto extraído:', productId);
-
-                // Verifica se o productId foi extraído corretamente
                 if (!productId) {
                     console.error('Erro: productId não encontrado');
                     return;
                 }
 
-                // Define a quantidade, por exemplo, 1 para adicionar um item
                 const quantity = 1;
-
-                // Chama a função addToCart com o ID do produto e a quantidade
-                console.log('Chamando addToCart com productId:', productId, 'e quantity:', quantity);
                 addToCart(productId, quantity);
             });
         });
-    } else {
-        console.error('Nenhum botão de adicionar ao carrinho encontrado');
+
+        clearInterval(addCartButtonInterval);
     }
-}, 1500);
+}, 500);
 
 async function addToCart(productId, quantity) {
     try {
-        console.log('Iniciando requisição para /cart');
         const response = await fetch('https://grind-zone-api.vercel.app/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            credentials: 'include', // Garante que o cookie seja enviado
+            credentials: 'include',
             body: JSON.stringify({
                 productId: productId,
                 quantity: quantity
@@ -55,11 +52,8 @@ async function addToCart(productId, quantity) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Item adicionado ao carrinho:', data);
-            // Tratar a resposta e atualizar o front-end
-            console.log(data.message); // Exibe a mensagem "Item adicionado ao carrinho."
             showAlert('Produto adicionado com sucesso!', true);
-            updateCartDisplay(data.cart); // Atualiza a exibição do carrinho com os produtos
+            updateCartDisplay(data.cart);
         } else {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
@@ -73,12 +67,12 @@ async function fetchCart() {
     try {
         const response = await fetch('https://grind-zone-api.vercel.app/api/cart', {
             method: 'GET',
-            credentials: 'include', // Inclui os cookies
+            credentials: 'include',
         });
 
         if (response.ok) {
             const data = await response.json();
-            updateCartDisplay(data.cart); // Atualiza a exibição com os itens do carrinho
+            updateCartDisplay(data.cart);
             renderizarResumoCompra(data.cart);
             document.getElementById('nome_cart').textContent = data.userName;
         } else {
@@ -97,16 +91,14 @@ async function fetchCart() {
 }
 
 export async function removeItemFromCart(productId) {
-    console.log("Removendo o produto com o ID:", productId);
     try {
         const response = await fetch(`https://grind-zone-api.vercel.app/api/cart/${productId}`, {
             method: 'DELETE',
-            credentials: 'include', // Inclui os cookies
+            credentials: 'include',
         });
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Dados retornados:', data); // Verifique aqui
             showAlert('Produto excluído com sucesso!', true);
             updateCartDisplay(data.cart);
             renderizarResumoCompra(data.cart);
@@ -126,19 +118,18 @@ export async function updateQuantity(productId, change) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ quantity: change }), // Envia a mudança de quantidade
+            body: JSON.stringify({ quantity: change }),
             credentials: 'include'
         });
 
         if (response.ok) {
             const updatedCart = await response.json();
-            console.log("Carrinho atualizado com sucesso:", updatedCart);
             showAlert('Quantidade alterada com sucesso!', true);
-            updateCartDisplay(updatedCart); // Atualiza a exibição do carrinho no front-end
+            updateCartDisplay(updatedCart);
             renderizarResumoCompra(updatedCart);
         } else {
             const errorData = await response.json();
-            showAlert(`Erro ao alterar a quantidade: ${errorData.message}`, false); // Exibe a mensagem de erro
+            showAlert(`Erro ao alterar a quantidade: ${errorData.message}`, false);
         }
     } catch (error) {
         console.error('Erro no servidor ao alterar a quantidade:', error);
@@ -146,12 +137,17 @@ export async function updateQuantity(productId, change) {
     }
 }
 
-const emptyMessage = document.createElement('h5');
-emptyMessage.classList.add('text-center', 'fw-semibold', 'mt-5', 'pt-5');
+function openLoginModal() {
+    const loginModal = new bootstrap.Modal(document.getElementById('modal-perfil'), {
+        keyboard: false
+    });
+    loginModal.show();
+}
+
+const emptyMessage = document.createElement('h3');
+emptyMessage.classList.add('text-center', 'font-padrao', 'mt-5', 'pt-5');
 
 function updateCartDisplay(cart) {
-    console.log("Atualizando exibição do carrinho com:", cart);
-
     const cartTable = document.querySelector("table");
     const cartContent = document.getElementById("conteudo-cart");
     const resumoContainer = document.getElementById("resumo-compra-container");
@@ -172,7 +168,6 @@ function updateCartDisplay(cart) {
     }
 
     if (isCartEmpty) {
-        console.log("Carrinho vazio.");
         emptyMessage.textContent = 'Seu carrinho está vazio.';
         if (!mainCart.contains(emptyMessage)) {
             mainCart.appendChild(emptyMessage);
@@ -186,7 +181,6 @@ function updateCartDisplay(cart) {
 
     cart.items.forEach(item => {
         const product = item.productId;
-        console.log("Produto recebido:", product); // Verifique se o objeto contém os detalhes do produto
 
         if (product && product.price) {
             const cartRow = document.createElement('tr');
@@ -228,7 +222,6 @@ function updateCartDisplay(cart) {
         }
     });
 
-    // Selecionar os botões de remoção após adicionar todos os produtos
     const removeBtns = document.querySelectorAll('.remove_cart');
     const updateMinusBtns = document.querySelectorAll('.updateCartMinus');
     const updatePlusBtns = document.querySelectorAll('.updateCartPlus');
@@ -243,7 +236,6 @@ function updateCartDisplay(cart) {
     updateMinusBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const productId = btn.getAttribute('data-product-id');
-            console.log("Diminuindo a quantidade para o produto:", productId);
             updateQuantity(productId, -1);
         });
     });
@@ -251,22 +243,20 @@ function updateCartDisplay(cart) {
     updatePlusBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const productId = btn.getAttribute('data-product-id');
-            console.log("Aumentando a quantidade para o produto:", productId);
             updateQuantity(productId, 1);
         });
     });
 }
 
 function renderizarResumoCompra(carrinho) {
-    console.log('Renderizando resumo com:', carrinho);
+
     const resumoContainer = document.getElementById('resumo-compra-container');
 
-    // Limpa o conteúdo anterior
     resumoContainer.innerHTML = '';
 
     if (carrinho.items.length > 0) {
         const subTotal = carrinho.items.reduce((total, item) => total + (item.quantity * item.productId.price), 0);
-        const frete = 0; // Adicione lógica para calcular frete, se necessário
+        const frete = 0;
         const total = subTotal + frete;
 
         resumoContainer.innerHTML = `

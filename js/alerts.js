@@ -28,4 +28,12 @@ export function hideAlert() {
     alertBox.style.display = 'none';
 }
 
+export function checkTokenCookie() {
+    const cookies = document.cookie.split('; ').map(cookie => cookie.split('='));
+    const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
+    
+    // Verifica se o cookie `token` foi encontrado e possui algum valor
+    return tokenCookie !== undefined && tokenCookie[1] !== '';
+}
+
 window.hideAlert = hideAlert;
