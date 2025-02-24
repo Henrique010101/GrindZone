@@ -1,4 +1,3 @@
-// alerts.js
 export function showAlert(message, isSuccess) {
     const alertBox = document.getElementById('alertBox');
     const alertMessage = document.getElementById('alertMessage');
@@ -26,6 +25,14 @@ export function showAlert(message, isSuccess) {
 export function hideAlert() {
     const alertBox = document.getElementById('alertBox');
     alertBox.style.display = 'none';
+}
+
+export function checkTokenCookie() {
+    const cookies = document.cookie.split('; ').map(cookie => cookie.split('='));
+    const tokenCookie = cookies.find(cookie => cookie[0] === 'token');
+    
+    // Verifica se o cookie `token` foi encontrado e possui algum valor
+    return tokenCookie !== undefined && tokenCookie[1] !== '';
 }
 
 window.hideAlert = hideAlert;

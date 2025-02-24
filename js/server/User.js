@@ -85,8 +85,7 @@ async function loginUser(event) {
     }
 }
 
-async function verifySession() {
-
+export async function verifySession() {
     try {
         const response = await fetch('https://grind-zone-api.vercel.app/api/check-session', {
             method: 'GET',
@@ -95,25 +94,30 @@ async function verifySession() {
 
         if (response.ok) {
             const data = await response.json();
-
             if (data.isAuthenticated) {
+                // Se o usuário estiver autenticado
                 document.getElementById('nav_entrar').style.display = 'none';
                 document.getElementById('nav_registrar').style.display = 'none';
                 document.getElementById('nav_sair').style.display = 'block';
                 document.getElementById('nav_cart').style.display = 'block';
+                return true;
             } else {
+                // Se o usuário não estiver autenticado
                 document.getElementById('nav_entrar').style.display = 'block';
                 document.getElementById('nav_registrar').style.display = 'block';
                 document.getElementById('nav_sair').style.display = 'none';
                 document.getElementById('nav_cart').style.display = 'none';
+                return false;
             }
         } else {
-            console.error('Usuário não autenticado (error):', response.statusText);
+            console.error('Erro ao verificar autenticação:', response.statusText);
+            return false;
         }
     } catch (error) {
         console.error('Erro ao verificar estado de autenticação:', error);
+        return false;
     }
-}
+};
 
 async function logout() {
     try {
@@ -156,4 +160,3 @@ document.addEventListener('click', async (event) => {
         // Execute a ação aqui
     }
 });
-

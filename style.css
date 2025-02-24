@@ -22,6 +22,10 @@ body {
   background-color: var(--cor2-light);
 }
 
+.font-padrao {
+  font-family: var(--font-padrao);
+}
+
 .banner-home {
   object-fit: cover;
   width: 100%;
