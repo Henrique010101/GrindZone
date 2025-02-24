@@ -1,11 +1,10 @@
 import { showAlert } from "../alerts.js";
 import { verifySession } from "./User.js";
+
 let addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cartContainer = document.getElementById('conteudo-cart');
 const mainCart = document.getElementById('main_cart');
 const nomeUsuario = document.getElementById('nome_usuario');
-console.log(addToCartButtons)
-
 
 const addCartButtonInterval = setInterval(() => {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -229,7 +228,7 @@ function updateCartDisplay(cart) {
     removeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const productId = btn.getAttribute('data-product-id');
-            removeItemFromCart(productId,);
+            removeItemFromCart(productId);
         });
     });
 
@@ -249,7 +248,6 @@ function updateCartDisplay(cart) {
 }
 
 function renderizarResumoCompra(carrinho) {
-
     const resumoContainer = document.getElementById('resumo-compra-container');
 
     resumoContainer.innerHTML = '';
@@ -288,7 +286,6 @@ const navCart = document.getElementById('nav_cart');
 const removeCart = document.getElementById('button_remove_cart');
 document.addEventListener('DOMContentLoaded', function () {
     navCart.addEventListener('click', () => {
-        mainCart
         fetchCart();
     });
-})
+});
